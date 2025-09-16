@@ -1,0 +1,13 @@
+.DS_Store
+
+# no subo cualquier carpeta llamada profesor
+profesor/
+
+examen/
+
+
+# voy subiendo poco a poco
+tema2_php/
+
+
+
