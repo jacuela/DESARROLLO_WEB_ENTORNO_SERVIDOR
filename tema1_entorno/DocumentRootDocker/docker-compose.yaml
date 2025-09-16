@@ -1,0 +1,19 @@
+# Services
+services:
+  # Apache + PHP
+  apache_php:
+    container_name: apache_php_container
+    image: php:8-apache
+    volumes:
+      - ./src/:/var/www/html
+    expose:
+      - 80
+    ports:
+      - 8888:80
+      
+
+# Lanzar con
+# docker-compose up -d
+
+# Ver los logs con
+# docker-compose logs -f
