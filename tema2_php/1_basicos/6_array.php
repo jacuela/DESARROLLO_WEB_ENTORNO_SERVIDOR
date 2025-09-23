@@ -15,13 +15,13 @@ foreach ($nombres as $nombre) {
 echo "- - - - - -<br>";
 
 //Creamos array vacio y le añadimos valores
-$edades = [];
-$edades[] = 34;
-$edades[] = 23;
+$lista = [];
+$lista[] = 34;
+$lista[] = "hola";
 
 
-foreach ($edades as $edad) {
-    echo "$edad<br>";
+foreach ($lista as $item) {
+    echo "$item<br>";
 }
 
 

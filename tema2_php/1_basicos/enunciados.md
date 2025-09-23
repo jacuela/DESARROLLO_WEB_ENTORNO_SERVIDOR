@@ -33,6 +33,13 @@ Implementa un programa que calcule el factorial de un número utilizando un bucl
 
 Define un array con nombres de personas y recórrelo con un bucle foreach, imprimiendo cada nombre.
 
+Crea un array vacio llamado lista. Posteriormente, añade los valores 34 y "hola". Imprime el array con foreach. 
+
+
+foreach ($edades as $edad) {
+    echo "$edad<br>";
+}
+
 ⸻
 
 🔹 7. Ordenar un array numérico
