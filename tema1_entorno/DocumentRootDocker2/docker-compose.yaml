@@ -1,0 +1,49 @@
+
+services:
+  apache_php:
+    container_name: apache_php_container
+    #image: php:8-apache
+    build: . #usamos el dokerfile para instalar la extension mysqli
+    volumes:
+      - ./src/:/var/www/html
+    ports:
+      - 8889:80
+    depends_on:
+      - mysql
+    restart: unless-stopped
+
+  mysql:
+    container_name: mysql_container
+    image: mysql:8
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: myapp
+      MYSQL_USER: myuser
+      MYSQL_PASSWORD: mypass
+    volumes:
+      - db_data:/var/lib/mysql
+    ports:
+      - 3306:3306
+    restart: unless-stopped
+
+  phpmyadmin:
+    container_name: phpmyadmin_container
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_HOST: mysql
+      PMA_USER: myuser
+      PMA_PASSWORD: mypass
+    ports:
+      - 8080:80
+    depends_on:
+      - mysql
+    restart: unless-stopped
+
+volumes:
+  db_data:
+
+# Lanzar con
+# docker-compose up -d
+
+# Ver los logs con
+# docker-compose logs -f

@@ -10,7 +10,8 @@
 <body>
     <?php
 
-    print '<p>hola PHP 19</p>';
+    print '<p>hola PHP</p>';
+    echo "<p>adios PHP</p>";
 
     ?>
 

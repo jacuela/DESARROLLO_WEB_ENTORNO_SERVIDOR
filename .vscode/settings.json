@@ -8,6 +8,5 @@
         "baseUri": "/",                             //  ii. workspace
         "proxyUri": "http://localhost:80" // iii. actual address
         //"proxyUri": "http://localhost:80/dwes" // prueba pero omites el dwes en URL
-    }
-    
+    }    
 }
