@@ -1,9 +1,13 @@
 <?php
-$nombres = ["Ana", "Luis", "Carlos", "Marta"];
+$nombres = ["Ana", "Pedro", "Carlos"];
+
+echo "Tamaño del array:".count($nombres)."<br>";
+
 
 for ($i=0; $i<count($nombres); $i++) {
     echo "Nombre $i: $nombres[$i] <br>";
 }
+
 
 echo "- - - - - -<br>";
 
@@ -19,6 +23,7 @@ $lista = [];
 $lista[] = 34;
 $lista[] = "hola";
 
+//echo "$lista[5]";
 
 foreach ($lista as $item) {
     echo "$item<br>";
