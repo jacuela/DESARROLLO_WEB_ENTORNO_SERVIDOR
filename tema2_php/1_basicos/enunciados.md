@@ -61,6 +61,8 @@ Haz una función que reciba una palabra y devuelva true si es palíndroma (se le
 
 Implementa una función que reciba un array de números y devuelva el número más grande del array.
 
+Una vez hecho, mete la función en un archivo llamado utilidades.php dentro de una subcarpeta llamada funciones. Para poder usar la función, debes usar `require_once('funciones/utilidades.php');`
+
 
 ⸻
 
@@ -69,7 +71,8 @@ Implementa una función que reciba un array de números y devuelva el número m�
 Parte1
 Guarda el nombre, apellidos, edad y email. Los datos son Alicia Camacho, de 24 años con email alicia.camacho@gmail.com
 
-Muestra los datos de la persona con una lista sin numerar.
+- Muestra los datos de la persona con una lista sin numerar.
+- Muestra solo los campos.
 
 Parte2
 Crea un array asociativo con la notación => para almacenar edades de personas. 
@@ -82,8 +85,8 @@ print "<p>Camilo tiene {$edades["Camilo"]} años</p>";
 print "<p>Andrés tiene " . $edades["Andrés"] . " años</p>";
 
 ```
-Indica cuantas personas tiene el array.
-Luego, recorre los datos con un foreach para mostrar todos los datos y luego para mostrar solamente la lista de edades.
+- Indica cuantas personas tiene el array.
+- Muestra solamente la lista de edades.
 
 
 ⸻
@@ -144,6 +147,28 @@ $a = [
         'Correo' => 'foo_bar@example.com',
     ]
 ];
+```
+
+Para imprimir la cabecera de forma totalmente automática extrayendo el nombre de los campos de los datos:
+
+```php
+    //OPCION1
+    <?php
+        foreach ($a[0] as $key => $value){
+            echo "<th>$key</th>";
+        }
+    ?>
+```
+
+```php
+    //OPCION 2 que puede que veais
+    <?php
+        foreach ($a[0] as $key => $value){
+    ?>
+            <th><?php echo $key ?></th>
+    <?php    
+        }
+    ?>
 ```
 
 

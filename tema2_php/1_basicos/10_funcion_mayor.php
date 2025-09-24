@@ -13,6 +13,7 @@ function mayor($lista){
 
 }
 
+
 $lista = [3,6,1,8,9];
 
 echo "El mayor valor es: ".mayor($lista);
