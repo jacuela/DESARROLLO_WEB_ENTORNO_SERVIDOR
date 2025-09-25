@@ -1,19 +1,7 @@
 <?php
 
-function mayor($lista){
-    $mayor = $lista[0];
-    //$mayor = 0; //puede ser incorrecto si son todos negativos
-    foreach ($lista as $value) {
-        if ($value > $mayor){
-            $mayor = $value;
-        }
-    }
+require_once("funciones/utilidades.php");
 
-    return $mayor;
-
-}
-
-
-$lista = [3,6,1,8,9];
+$lista = [3,6,10,8,9];
 
 echo "El mayor valor es: ".mayor($lista);
