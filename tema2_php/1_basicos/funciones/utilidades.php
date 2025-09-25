@@ -1,7 +1,10 @@
 <?php
 
+
+
 //Archivo para incluir funciones que seran
 //llamadas posteriormente
+
 
 function mayor($lista){
     $mayor = $lista[0];

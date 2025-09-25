@@ -111,10 +111,13 @@ $persona["calificaciones_extendidas"]=["DAW1" => ["Programacion"=>6,"BBDD"=>4],
 
 🔹 13. Excepciones
 
+PARTE1
 Crea una función para dividir dos numeros. Al dividir por cero, creará una nueva excepción. 
 Llama a la función y captura la excepción dividendo 5 entre 0. 
 
-
+PARTE2
+Crea en `utilidades.php`una función llamada `mayor_numero()` a la que le pases una lista de numeros y te devuelva el mayor. En caso de que algun valor no sea un numero, lanza una excepción.
+Llama a la función para probarla.
 ⸻
 
 🔹 14. Clases y objetos
