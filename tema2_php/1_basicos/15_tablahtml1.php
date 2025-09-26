@@ -41,12 +41,18 @@ $data = [
                 }
                 ?>
             </tr>
-
-           
         </thead>
         <tbody>
-
-
+            <?php
+            foreach ($data as $fila){
+                //print_r($fila);echo("<br>");
+                echo "<tr>";
+                 foreach ($fila as $campo => $valor){
+                     echo "<td>$valor</td>";
+                 }
+                 echo "</tr>";
+            }    
+            ?>
         </tbody>
         <tfoot>
 
