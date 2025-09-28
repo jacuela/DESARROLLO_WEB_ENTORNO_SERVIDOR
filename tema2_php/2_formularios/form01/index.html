@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="estilos.css" title="Color">
+  <title>form_01</title>
+</head>
+
+<body>
+  <h1>####################Incompleto####################</h1>
+  <header>
+    <h1>Formulario 01</h1>
+  </header>
+  <main>
+    
+    <form action="recibe_datos.php" method="get">
+        <fieldset>
+          <legend>Envio tipo GET</legend>  
+          <p>
+            <!-- al usar <label> y que coincida con el id del <input> correspondiente, permite que al hacer click 
+            en el texto del <label>, el cursor se coloque directamente en el campo asociado -->
+            Nombre: <input type="text" name="nombre" size="40" required>
+          </p>
+          <p>
+            Edad: <input type="number" name="edad" min="0" required>
+          </p>
+        </fieldset>
+        <p>
+            <input type="submit" value="Enviar">
+            <input type="reset" value="Borrar">
+        </p>
+    </form>
+
+    
+
+
+  </main>
+  <footer>
+    <hr>
+    <p>Autor: Juan Antonio Cuello</p>
+  </footer>
+</body>
+
+</html>
