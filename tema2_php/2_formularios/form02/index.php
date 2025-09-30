@@ -1,3 +1,34 @@
+<?php
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") { 
+    
+    //Compruebo que existe el campo nombre y que no es vacio
+    if (isset($_POST["nombre"]) && $_POST["nombre"]!=""){
+        $nombre = trim(htmlspecialchars(strip_tags($_POST["nombre"])));
+    }
+    else{
+        $nombreError = "No se ha escrito ningun nombre";
+    }
+
+    //Compruebo que existe el campo edad y que no es vacio
+    if (isset($_POST["edad"]) && $_POST["edad"]!=""){
+        if (is_numeric($_POST["edad"]) && $_POST["edad"]>0 
+            && $_POST["edad"]<150 ){
+                $edad = $_POST["edad"];
+        }else{
+                $edadError = "ERROR: la edad debe ser entre 1 y 150";
+        }
+
+    }
+    else{
+        $edadError = "No se ha indicado la edad";
+    }
+
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -9,7 +40,7 @@
 </head>
 
 <body>
-  <h1>####################Incompleto####################</h1>
+  
   <header>
     <h1>Formulario 02 - el form recibe los datos</h1>
   </header>
@@ -39,10 +70,26 @@
           </p>
     </form>
 
+    <?php
+      if (isset($nombreError)) {
+        print "<p class='error'>$nombreError</p>";
+      }
+      if (isset($edadError)) {
+        print "<p class='error'>$edadError</p>";
+      }
 
+    ?>
     
     <br><br>
     <div class="datos-recibidos">
+      <?php
+        //Mostramos los datos
+        if (isset($nombre) && isset($edad)) {
+            print " - Nombre: $nombre" . "<br>";
+            print " - Edad: $edad" . "<br>";
+        }
+      ?>
+
       
     </div>
     
