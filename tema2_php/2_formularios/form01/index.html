@@ -33,8 +33,42 @@
         </p>
     </form>
 
-    
+    <form action="recibe_datos.php" method="post">
+        <fieldset>
+          <legend>Envio tipo POST</legend>  
+          <p>
+            <!-- al usar <label> y que coincida con el id del <input> correspondiente, permite que al hacer click 
+            en el texto del <label>, el cursor se coloque directamente en el campo asociado -->
+            Nombre: <input type="text" name="nombre" size="40" required>
+          </p>
+          <p>
+            Edad: <input type="number" name="edad" min="0" required>
+          </p>
+        </fieldset>
+        <p>
+            <input type="submit" value="Enviar">
+            <input type="reset" value="Borrar">
+        </p>
+    </form>
 
+    <br><br>
+    <form action="recibe_datos_controlado.php" method="post">
+        <fieldset>
+          <legend>Envio tipo POST con control en el servidor</legend>  
+          <p>
+            <!-- al usar <label> y que coincida con el id del <input> correspondiente, permite que al hacer click 
+            en el texto del <label>, el cursor se coloque directamente en el campo asociado -->
+            Nombre: <input type="text" name="nombre" size="40">
+          </p>
+          <p>
+            Edad: <input type="number" name="edad" min="0">
+          </p>
+        </fieldset>
+        <p>
+            <input type="submit" value="Enviar">
+            <input type="reset" value="Borrar">
+        </p>
+    </form>
 
   </main>
   <footer>
