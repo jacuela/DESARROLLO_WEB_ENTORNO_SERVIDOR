@@ -3,13 +3,35 @@
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
    
     //############################## depuracion
-    // print "<pre>";
-    // print "Matriz \$_FILES" . "<br>";
-    // print_r($_FILES);
-    // print "</pre>\n";
+    print "<pre>";
+    print "Matriz \$_FILES" . "<br>";
+    print_r($_FILES);
+    print "</pre>\n";
     //#######################################
 
+    if ($_FILES["fichero"]["size"] > 1000000) {
+        $mensaje = "Archivo demasiado grande.";
+    }
+    else{
+      //Tamaño adecuado del archivo 
+      $ruta_subida = "bbdd/";
+      $res = move_uploaded_file($_FILES["fichero"]["tmp_name"], 
+                            $ruta_subida . $_FILES["fichero"]["name"]);
+
+     if ($res){
+        $mensaje = "Fichero guardado correctamente";
+     }             
+     else{
+        $mensaje = "Error al guardar el fichero";
+     }
+
+    }  
+
 }
+
+
+
+
 
 ?>
 
