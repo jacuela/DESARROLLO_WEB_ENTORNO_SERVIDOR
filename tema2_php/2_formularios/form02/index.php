@@ -1,8 +1,5 @@
 <?php
 
-
-
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") { 
     
     print "<pre>";
@@ -49,7 +46,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
   
   <header>
-    <h1>Formulario 02 - el form recibe los datos</h1>
+    <h1>Formulario 02</h1>
+    <p class="centrado"> El propio form recibe los datos</p>
+    <br><br>
+   
   </header>
   <main>
     
@@ -83,12 +83,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
            <input type="checkbox" name="aficiones[]" value="cine"> Cine<br />
            <input type="checkbox" name="aficiones[]" value="lectura"> Lectura<br />
           </p>
-
-
-
-
-
-
 
 
         </fieldset>
