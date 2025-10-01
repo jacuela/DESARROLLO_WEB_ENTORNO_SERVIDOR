@@ -36,8 +36,7 @@
             El valor no es realmente secreto, es oculto: cualquiera puede inspeccionarlo y modificarlo antes de enviar.
             Lo comprobamos mirando el html y mirando la pestaña network -> index.php -> payload -> formdata
           -->
-         
-
+          <input type="hidden" name="valoroculto" value="secreto">
         </fieldset>
 
           <p>
@@ -49,6 +48,24 @@
     <br><br>
     <!-- aqui voy a indicar que botón he pulsado y muestro el valor oculto -->
     
+    <?php
+    if ($_SERVER["REQUEST_METHOD"] == "POST"){
+      print "<pre>";
+      print_r($_POST);
+      print "</pre>\n";
+
+      //Indico boton pulsado
+      if ($_POST["boton"] == "tipo1") {
+        print "<p>He pulsado <strong>Boton Valor1</strong></p>";
+      }
+      if ($_POST["boton"] == "tipo2") {
+        print "<p>He pulsado <strong>Boton Valor2</strong></p>";
+      }
+
+    }
+
+
+    ?>
     
     
   </main>
