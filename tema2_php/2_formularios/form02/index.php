@@ -28,6 +28,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $edadError = "No se ha indicado la edad";
     }
 
+    //Recojo el sexo
+    if (isset($_POST["sexo"]) && $_POST["sexo"] != "") {
+        $sexo = $_POST["sexo"];
+    } else {
+        $sexoERROR = "Hay que escoger un sexo";
+    }
+
+    //Recojo las aficiones
+    if (isset($_POST["aficiones"])){
+        $aficiones = $_POST["aficiones"];     
+    }
+    else{
+        $aficiones = []; //sin aficiones
+    }
+
 }
 
 ?>
@@ -100,6 +115,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       if (isset($edadError)) {
         print "<p class='error'>$edadError</p>";
       }
+      if (isset($sexoError)){
+        print "<p class='error'>$sexoError</p>";
+      }
+
 
     ?>
     
@@ -107,13 +126,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="datos-recibidos">
       <?php
         //Mostramos los datos
-        if (isset($nombre) && isset($edad)) {
+        if (isset($nombre) && isset($edad) && isset($sexo)) {
             print " - Nombre: $nombre" . "<br>";
             print " - Edad: $edad" . "<br>";
+            echo (" - Sexo: $sexo"."<br>");
+            echo (" - Aficiones:");
+            echo ("<ul>");
+            foreach ($aficiones as $aficion){
+              echo ("<li>$aficion</li>");
+            }
+            echo ("</ul>");
+
         }
       ?>
-
-      
     </div>
     
 
