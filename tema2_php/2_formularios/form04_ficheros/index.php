@@ -1,12 +1,17 @@
 <?php
 
+require_once ("includes/funciones.php");
+
+$subidaOK = false;
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
    
+
     //############################## depuracion
-    print "<pre>";
-    print "Matriz \$_FILES" . "<br>";
-    print_r($_FILES);
-    print "</pre>\n";
+    // print "<pre>";
+    // print "Matriz \$_FILES" . "<br>";
+    // print_r($_FILES);
+    // print "</pre>\n";
     //#######################################
 
     if ($_FILES["fichero"]["size"] > 1000000) {
@@ -19,7 +24,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             $ruta_subida . $_FILES["fichero"]["name"]);
 
      if ($res){
-        $mensaje = "Fichero guardado correctamente";
+        $mensaje = "Fichero guardado correctamente. (". 
+                numero_ficheros_directorio($ruta_subida).
+                " archivos en bbdd)<br>";
+
+        $subidaOK = true;
      }             
      else{
         $mensaje = "Error al guardar el fichero";
@@ -28,10 +37,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }  
 
 }
-
-
-
-
 
 ?>
 
@@ -64,9 +69,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </form>
 
     <?php
-       
-
-    ?>
+        if (isset($mensaje)){
+            echo ("<p class='mensaje'>$mensaje</p>");
+        }
+         
+        if ($subidaOK){
+          echo ("Datos del fichero:<br>");
+          $nombreFichero = $_FILES["fichero"]["name"];
+          $tamBytes = $_FILES["fichero"]["size"];
+          $tamKB = round($tamBytes / 1024);
+          echo "Nombre del archivo: $nombreFichero<br>";
+          echo "Tamaño: $tamBytes bytes | $tamKB KB<br>";
+          echo "<img src='$ruta_subida$nombreFichero' width=80px'";
+        }
+     ?>
 
 
 
