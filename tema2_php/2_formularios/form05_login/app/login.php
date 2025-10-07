@@ -26,6 +26,13 @@
             <button type="submit">Acceder</button>
             
         </form>
+        <br>
+        <?php
+            if (isset($_GET["mensaje"])){
+                $mensaje = $_GET["mensaje"];
+                echo ("<p class='mensaje fade-in-out'>$mensaje</p>");
+            }
+        ?>
         <br><br><br><br>
         
 

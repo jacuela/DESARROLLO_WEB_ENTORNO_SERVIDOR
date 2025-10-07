@@ -1,7 +1,6 @@
 <?php
 require_once ("includes/funciones.php");
-
-
+require_once ("modelo/usuario.php");
 
 
 
@@ -26,6 +25,13 @@ else{
         die;
     }
 
+    if (existeUsuario($email)){
+        $mensaje = "ERORR: Email no disponible.";
+        header("Location: alta.php?mensaje=$mensaje");
+        die;
+    }
+
+
     //>>>ALUMNO: comprobar si el email ya existe
 
     //Password
@@ -45,7 +51,7 @@ else{
     $lista_usuarios = json_decode($jsonData);
 
     //Me creo el objeto usuario
-    $usuario = new Usuario($nombre,$email,$passwor1);
+    $usuario = new Usuario($nombre,$email,$password1);
 
     array_push($lista_usuarios,$usuario);
 
