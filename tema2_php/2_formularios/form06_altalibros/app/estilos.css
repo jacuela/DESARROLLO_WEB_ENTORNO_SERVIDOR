@@ -1,0 +1,239 @@
+*{
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0px;
+    background-color: lightgray;
+    font-family: sans-serif;
+    
+}
+
+main {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+
+h1 {
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 1.3em;
+}
+
+header h1{
+  padding-top: 20px;
+  padding-bottom: 20px;
+  color:white;
+  background-color:blue;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+hr{
+    border: 1px solid black;
+}
+
+.centrado{
+    text-align: center;
+    
+}
+
+/* esto es para el menu */
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+  text-align: center;
+  
+  
+}
+
+nav ul li{
+  display:inline-block;
+}
+
+
+a.menu {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+ 
+}
+
+a.menu2 {
+  display: block;
+  color: red;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+a.menu:hover {
+  background-color: blue;
+}
+
+/*fin del menu*/
+
+footer {
+  background-color: #333;
+  color: white;
+  padding: 20px;
+  margin-top: 20px;
+  text-align: center;
+}
+
+
+.error{
+    color: red;
+    font-size: 1.3em;
+
+}
+
+.mensaje{
+    /*color: green;
+    font-size: 1.3em;*/
+    margin: auto;
+    background-color: green;
+    color: #fff;
+    text-align: center;
+    border-radius: 10px;
+    padding: 16px;
+
+}
+
+
+.borde{
+    border: 1px solid black;
+    padding: 10px;
+}
+
+
+
+
+/* Para el mensaje */
+.fade-in-out {
+    opacity: 0;
+    animation: fade-in 0.5s ease-in forwards, fade-out 3s 1s ease-out forwards;
+    
+  }
+  
+  @keyframes fade-in {
+    100% {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes fade-out {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+
+
+  /* Para los formularios */
+  
+  .formulario {
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      width: 400px;
+      margin: auto;
+    }
+
+    .formulario h2 {
+      text-align: center;
+      margin-top: 0px;
+      margin-bottom: 30px;
+      color: #333;
+    }
+
+    .formulario label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+      color: #555;
+    }
+
+    .formulario input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    .formulario input:focus {
+      border-color: #007BFF;
+      outline: none;
+      box-shadow: 0 0 5px rgba(0,123,255,0.3);
+    }
+
+    .formulario button {
+      display: block;  
+      width: 50%;
+      margin: auto;
+      padding: 12px;
+      background: #007BFF;
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      font-size: 1.2rem;
+      cursor: pointer;
+      
+    }
+
+    .formulario button:hover {
+      background: #0056b3;
+    }
+
+
+
+
+/* CSS para la tabla*/
+
+  .tabla {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+  }
+
+  
+  .tabla th, .tabla td {
+    border: 2px solid #ddd;
+    padding: 12px;
+    text-align: left;
+  }
+
+  .tabla th {
+    background-color: #0078d7;
+    color: white;
+    text-transform: uppercase;
+  }
+
+
+  .tabla tr {
+    background-color: white;
+  }
+
+  .tabla tr:hover {
+    background-color: #dceeff;
+  }
+
+  
+.checkbox-genero input{ 
+  width:50px;
+
+}

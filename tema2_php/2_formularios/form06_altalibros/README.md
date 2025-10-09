@@ -18,3 +18,9 @@ Crearas las siguientes funciones:
 - **obtener():$lista_libros**: te devuelve una lista con los libros de la bbdd.
 
 
+## Vistas de la app
+<img src="./imagenes/vista1.png" alt="vista home" width="200">
+<br><br>
+<img src="./imagenes/vista2.png" alt="vista alta" width="200">
+<br><br>
+
