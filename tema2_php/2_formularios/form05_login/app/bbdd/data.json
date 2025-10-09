@@ -3,5 +3,10 @@
         "nombre": "PRUEBA",
         "email": "PRUEBA",
         "password": "PRUEBA"
+    },
+    {
+        "nombre": "Juan",
+        "email": "jacuela@gmail.com",
+        "password": "$2y$10$wXbqof6Fnv2bfvmGeptVSOcbJIyIIPfiicJ.6aRS2mFzBQNguPtGu"
     }
 ]
