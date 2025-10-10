@@ -23,7 +23,12 @@ else{
             $mensaje = "Titulo no puede estar vacio";
             header("Location: alta-libro.php?mensaje=$mensaje");
             die;
-    } 
+    }
+    else if (existeLibro($titulo)){
+        $mensaje = "No se pueden repetir titulos";
+        header("Location: alta-libro.php?mensaje=$mensaje");
+        die;
+    }
 
     //Procesamos el AUTOR
     $autor = recoge("autor");

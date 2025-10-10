@@ -16,6 +16,8 @@ Ademas, crearas la clase `libro.php` para poder manejar los libros.
 Crearas las siguientes funciones:
 - **guardar($libro)**: guarda el objeto libro en la bbdd
 - **obtener():$lista_libros**: te devuelve una lista con los libros de la bbdd.
+- **existeLibro($titulo):boolean**: te indica si el título está ya en la bbdd
+
 
 
 ## Vistas de la app

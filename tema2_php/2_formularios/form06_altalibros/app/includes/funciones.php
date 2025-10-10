@@ -39,3 +39,12 @@ function guardar($libro){
     
 }
 
+function existeLibro($titulo){
+    $lista_libros = obtenerLibros();
+    foreach ($lista_libros as $libro){
+        if ($libro->titulo == $titulo){
+            return true;
+        }
+    }
+    return false;
+}

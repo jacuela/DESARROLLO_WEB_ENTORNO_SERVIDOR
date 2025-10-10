@@ -40,5 +40,13 @@
             "ciencia-ficcion",
             "thriller"
         ]
+    },
+    {
+        "caratula": "generica.png",
+        "titulo": "Titulo",
+        "autor": "Autor",
+        "generos": [
+            "historico"
+        ]
     }
 ]
