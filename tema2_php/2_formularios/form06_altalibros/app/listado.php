@@ -63,15 +63,11 @@ $lista_libros = obtenerLibros();
                 
                 //Genero
                 echo "<td>";
-                if (is_array($fila->generos)){
-                    echo "<select id='genero' name='genero'>";
-                    foreach ($fila->generos as $ungenero){
-                        echo "<option value='$ungenero'>$ungenero</option>";
-                    }
-                    echo "</select>"; 
-                }else{
-                    echo $fila->generos;
+                echo "<select id='genero' name='genero'>";
+                foreach ($fila->generos as $ungenero){
+                    echo "<option value='$ungenero'>$ungenero</option>";
                 }
+                echo "</select>"; 
                 echo "</td>";
                 echo "</tr>";
             }    
