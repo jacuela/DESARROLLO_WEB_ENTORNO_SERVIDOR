@@ -42,29 +42,29 @@ $lista_libros = obtenerLibros();
         <tbody>
 
             <?php
-            foreach ($lista_libros as $fila){
-                //print_r($fila);echo("<br>");
+            foreach ($lista_libros as $libro){
+                //print_r($libro);echo("<br>");
                 echo "<tr>";
                 
                 //Caratura
                 echo "<td>";
-                echo "<img width='50px' src='bbdd/portadas/$fila->caratula'>";
+                echo "<img width='50px' src='bbdd/portadas/$libro->caratula'>";
                 echo "</td>";
 
                 //Titulo
                 echo "<td>";
-                echo $fila->titulo;
+                echo $libro->titulo;
                 echo "</td>";
 
                 //Autor
                 echo "<td>";
-                echo $fila->autor;
+                echo $libro->autor;
                 echo "</td>";
                 
                 //Genero
                 echo "<td>";
                 echo "<select id='genero' name='genero'>";
-                foreach ($fila->generos as $ungenero){
+                foreach ($libro->generos as $ungenero){
                     echo "<option value='$ungenero'>$ungenero</option>";
                 }
                 echo "</select>"; 
