@@ -25,14 +25,14 @@ else{
         die;
     }
 
+    //>>>ALUMNO: comprobar si el email ya existe
     if (existeUsuario($email)){
         $mensaje = "ERORR: Email no disponible.";
         header("Location: alta.php?mensaje=$mensaje");
         die;
     }
 
-
-    //>>>ALUMNO: comprobar si el email ya existe
+    
 
     //Password
     //ojo, '000'=='0000000' --> true
