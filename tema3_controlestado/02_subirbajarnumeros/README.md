@@ -1,4 +1,4 @@
-## 01 BOTÓN MAS Y MENOS
+## 02 BOTÓN MAS Y MENOS
 
 ## Sesiones
 Escriba un programa **de dos páginas** que muestre un valor numérico y permita subirlo o bajarlo mediante dos botones. Los valores mínimo y máximo a mostrar son 0 y 9 respectivamente. Si llegamos a esos valores límite, al pulsar el botón no haremos nada.
