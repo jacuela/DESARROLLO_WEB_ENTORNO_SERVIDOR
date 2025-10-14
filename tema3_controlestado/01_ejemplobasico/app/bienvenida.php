@@ -1,3 +1,14 @@
+<?php
+session_start();
+
+if (!isset($_SESSION["usuario"])){
+    header ("Location: index.php");
+    die;
+}
+$usuario = $_SESSION["usuario"];
+
+?>
+
 
 <!DOCTYPE html>
 <html lang="es">
@@ -6,7 +17,7 @@
     <title>Bienvenida</title>
 </head>
 <body>
-    <h2>Bienvenido, XXXXXXXXXXXXX 👋</h2>
+    <h2>Bienvenido, <?= $usuario ?> 👋</h2>
     <p>Has iniciado sesión correctamente.</p>
     <a href="logout.php">Cerrar sesión</a>
 </body>
