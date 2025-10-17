@@ -1,0 +1,25 @@
+
+.body-tipo2 {
+    margin: 20px;
+    background-color: gainsboro;
+    font-family: sans-serif;
+}
+
+h1 {
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 1.5em;
+}
+
+hr{
+    border: 1px solid black;
+}
+
+.error{
+    color: red;
+    font-size: 1.3em;
+}
+.en_verde{
+    color: greenyellow;
+    font-size: 1.3em;
+}
