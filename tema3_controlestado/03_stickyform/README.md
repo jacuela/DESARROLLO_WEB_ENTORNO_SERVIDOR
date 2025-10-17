@@ -17,7 +17,7 @@ Ficheros a usar:
 
 
 ## Mejora
-Añade al form el campo de sexo y varios checkbox con las aficiones (como en el tema2/formularios/form02).
+Añade al form el campo de sexo y varios checkbox con las aficiones (como en el tema2/formularios/form02). Las aficiones son *opcionales*
 
 Te adjunto un ejemplo de como tratar estos dos nuevos controles
 
