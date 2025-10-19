@@ -47,9 +47,20 @@ document.querySelectorAll('.butaca').forEach(butaca => {
 </script>
 ```
 
+## CAMBIO DE VIDA DE AL SESIÓN
+Queremos que aunque se cierre el navegador, se siga recordando las butacas seleccionadas durante 1 día. Esto con cookies no se puede hacer, porque necesitariamos 12 cookies. Totalmente posible pero ineficiente. 
+Las sesiones por defecto duran hasta que se cierra el navegador, pero, en realidad, se pueden prolongar el tiempo que queramos. Basta con:
 
-- FORMA2: usar un form por cada butaca. Dicho form estará formado por la imagen y por dos campos *input hidden* con la fila y la columna.
+```php
+// Duración en segundos (24 horas = 86400 segundos)
+$duracion = 86400;
 
+// Ajustar el tiempo de vida de la cookie de sesión
+session_set_cookie_params($duracion);
+
+// Iniciar la sesión
+session_start();
+```
 
 ## VISTAS
 
