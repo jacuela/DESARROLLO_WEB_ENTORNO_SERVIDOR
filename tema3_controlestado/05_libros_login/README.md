@@ -35,13 +35,18 @@ Podemos dejar la pagina del perfil mínima, en construcción.
 ## BOTON VER Y BORRAR
 Vamos a incluir en el listado de los libros un par de botones. Un botón para VER los datos del libro en una página aparte y un botón parta BORRAR un libro del json. Ambos botones llamarán a los archivos `ver.php` y `borrar.php`. Además, vas a crear dos funciones que serán llamadas: `obtenerLibro($titulo)` y `borrarLibro($titulo)`. A la hora de implementar la acción de ambos botones, como no tenemos un ID de cada libro, vamos a usar el título del libro como identificador. Usaremos dos formas, una con cada botón, de implementar estas acciones:
 
-### Botón VER
+### Botón BORRAR
 Crearemos un formulario enviando el título en un campo oculto. Hay que crear un formulario por cada libro/botón/elemento de la tabla. Si metemos toda la tabla en un único formulario, al tener todos los campos hiddden con el mismo name, se va a enviar el último título. 
 
-`<input type="hidden" name="titulo_a_borrar" value="Dune">`
+```html
+<form action="borrar.php" method="POST">
+                    <input type="hidden" name="titulo_a_borrar" value="Dune"> 
+                    <button class="borrar-boton" type="submit">BORRAR</button>
+                    </form> 
+```
 
 
-### Botón BORRAR
+### Botón VER
 Usaremo un enlace `<a>`y en la URL del enlace le pasamos como parámetro (tipo GET) el título del libro 
 
 `<a class="ver-enlace" href="ver.php?titulo=Dune">VER</a>`

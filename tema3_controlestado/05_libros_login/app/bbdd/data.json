@@ -25,15 +25,6 @@
         ]
     },
     {
-        "caratula": "generica.png",
-        "titulo": "Titulo",
-        "autor": "Autor",
-        "generos": [
-            "ciencia-ficcion",
-            "historico"
-        ]
-    },
-    {
         "caratula": "mobydick.jpg",
         "titulo": "Moby Dick",
         "autor": "Herman Melville",
