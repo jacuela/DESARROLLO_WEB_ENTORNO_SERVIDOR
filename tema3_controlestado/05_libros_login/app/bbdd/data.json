@@ -1,0 +1,44 @@
+[
+    {
+        "caratula": "dune.jpg",
+        "titulo": "Dune",
+        "autor": "Frank Herbert",
+        "generos": [
+            "ciencia-ficcion"
+        ]
+    },
+    {
+        "caratula": "1984.jpg",
+        "titulo": "1984",
+        "autor": "G. Orwell",
+        "generos": [
+            "ciencia-ficcion"
+        ]
+    },
+    {
+        "caratula": "elmarciano.jpg",
+        "titulo": "El Marciano",
+        "autor": "Andy Weir",
+        "generos": [
+            "ciencia-ficcion",
+            "thriller"
+        ]
+    },
+    {
+        "caratula": "generica.png",
+        "titulo": "Titulo",
+        "autor": "Autor",
+        "generos": [
+            "ciencia-ficcion",
+            "historico"
+        ]
+    },
+    {
+        "caratula": "mobydick.jpg",
+        "titulo": "Moby Dick",
+        "autor": "Herman Melville",
+        "generos": [
+            "historico"
+        ]
+    }
+]

@@ -1,6 +1,7 @@
 # LISTADO DE LIBROS CON LOGIN  
 
 Vamos a modificar el ejercicio de la lista de libros (tema2/formularios/form06). Introduciremos nuevas mejoras:
+
 - Hay que loguearse en la app para poder acceder a su operativa, es decir, poder ver el listado y poder incluir un nuevo libro. 
 - Al loguearnos, en el menú aparecerá el nombre del usuario logueado y tendremos una opción de CERRAR SESIÓN.
 - Vamos a incluir en el listado un botón en cada libro para BORRAR el libro y otro botón para mostrar en grande los datos del libro, la portada. 
@@ -33,7 +34,6 @@ Podemos dejar la pagina del perfil mínima, en construcción.
 
 ## OPCIONAL
 Programar tambien una alta de usuarios. 
-
 
 ## BOTON BORRAR
 ...
