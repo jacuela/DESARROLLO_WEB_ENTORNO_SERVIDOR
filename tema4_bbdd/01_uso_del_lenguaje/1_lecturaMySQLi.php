@@ -3,7 +3,7 @@
     $servidor = "localhost";
     $usuario = "root";
     $password = "";
-    $base_datos = "personas";
+    $base_datos = "personasDB";
 
     // "SERVIDOR", "USUARIO", "CONTRASEÑA", "BASE DE DATOS"
     try{
