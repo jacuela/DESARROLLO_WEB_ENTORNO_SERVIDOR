@@ -8,7 +8,7 @@ function hola(){
 
 
 //Función que me devuelve la conexión a la bbdd
-function conectadDb(){
+function conectaDb(){
 
     global $mysqlUser;
     global $mysqlHost; 

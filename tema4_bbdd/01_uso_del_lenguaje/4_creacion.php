@@ -9,7 +9,7 @@ try{
 
     //BORRO LA BBDD
     $sql = "DROP DATABASE IF EXISTS personas_prueba";
-    $conexion->query($sql);    //$conexion->exec($sql);   
+    $conexion->query($sql);    //$conexion->exec($sql) devuelve solo el nº de filas afectadas;   
     
     //CREO LA BBDD
     $sql = "CREATE DATABASE personas_prueba
@@ -29,7 +29,7 @@ try{
         edad INT UNSIGNED,
         PRIMARY KEY(id)
         )";
-    $conexion->exec($sql);    
+    $conexion->query($sql);    
      print "    <p>Tabla creada correctamente.</p>\n";   
 
 
