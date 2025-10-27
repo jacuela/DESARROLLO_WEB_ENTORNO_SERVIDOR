@@ -51,11 +51,15 @@ try{
 
 
     <?php
-    //USANDO FETCHALL. ME GUARDO TODOS LOS DATOS. FETCH YA DEVUELVE 0 TUPLAS.
-    print "<hr>";
-    print "Usando fetchall";
-    $listaPersonas = $sentencia->fetchAll(PDO::FETCH_ASSOC);
-    foreach ($listaPersonas as $registro) {
+    
+print "<hr>";
+
+
+    //USANDO UN WHILE CON FETCH. OJO, ES UN CURSO, LUEGO YA NO HAY ACCESO
+    print "Usando while con fetch";
+    while ($registro = $sentencia->fetch(PDO::FETCH_ASSOC)) {
+    // ------> se puede usar, pero prefiero fetch ---> foreach ($sentencia as $registro) {
+
         print "      <tr>\n";
         print "        <td>$registro[id]</td>\n";
         print "        <td>$registro[nombre]</td>\n";
@@ -65,18 +69,17 @@ try{
     }
     print "    </table>\n";
 
-    print("<pre>");
-    //print_r($listaPersonas);
-    print("</pre");
-    
-    
-    print "<hr>";
+
+print "<hr>";
 
 
-
-    //USANDO UN WHILE CON FETCH. OJO, ES UN CURSO, LUEGO YA NO HAY ACCESO
-    // print "Usando while con fetch";
-    // while ($registro = $sentencia->fetch()) {
+    //USANDO FETCHALL. ME GUARDO TODOS LOS DATOS. FETCH YA DEVUELVE 0 TUPLAS.
+    //USO por ejemplo para crear json (api). O porque son pocos datos y los quieres todos
+    //para poder recorrerlos varias veces.
+    // print "Usando fetchall";
+   
+    // $listaPersonas = $sentencia->fetchAll(PDO::FETCH_ASSOC);   
+    // foreach ($listaPersonas as $registro) {
     //     print "      <tr>\n";
     //     print "        <td>$registro[id]</td>\n";
     //     print "        <td>$registro[nombre]</td>\n";
@@ -86,9 +89,19 @@ try{
     // }
     // print "    </table>\n";
 
+    // print("<pre>");
+    // //print_r($listaPersonas);
+    // print("</pre");
+    
+    
+    
 
 
-    print "<hr>";
+
+    
+
+
+print "<hr>";
     
     
     
