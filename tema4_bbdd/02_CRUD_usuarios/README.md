@@ -41,7 +41,7 @@ INSERT INTO usuarios (nombre, apellidos, usuario, fecha_nac) VALUES
 
 ### Estructura de la app
 
-<div style="text-align:center"><img src="img/estructura.png" width="400px"></div>
+<div style="text-align:center"><img src="files/estructura.png" width="400px"></div>
 
 
 
