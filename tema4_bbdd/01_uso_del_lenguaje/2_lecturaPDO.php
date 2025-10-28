@@ -2,11 +2,10 @@
 
 require_once "funciones.php";
 
-$conexion = conectadDb();
+$conexion = conectaDb();
 
 //Consulta sin preparar
-
-$tabla = "personas";    //probar la inyeccion con ;DROP TABLE personas
+$tabla = "personas;DROP table personas";    //probar la inyeccion con ;DROP TABLE personas
 
 $sql = "SELECT * FROM $tabla";
 //$consulta = "SELECT * FROM personas where id=2";
@@ -56,18 +55,19 @@ print "<hr>";
 
 
     //USANDO UN WHILE CON FETCH. OJO, ES UN CURSO, LUEGO YA NO HAY ACCESO
-    print "Usando while con fetch";
-    while ($registro = $sentencia->fetch(PDO::FETCH_ASSOC)) {
-    // ------> se puede usar, pero prefiero fetch ---> foreach ($sentencia as $registro) {
+    // print "Usando while con fetch";
+    // while ($registro = $sentencia->fetch(PDO::FETCH_ASSOC)) {
+    // // ------> se puede usar, pero prefiero fetch ---> 
+    // //foreach ($sentencia as $registro) {
 
-        print "      <tr>\n";
-        print "        <td>$registro[id]</td>\n";
-        print "        <td>$registro[nombre]</td>\n";
-        print "        <td>$registro[apellidos]</td>\n";
-        print "        <td>$registro[edad]</td>\n";
-        print "      </tr>\n";
-    }
-    print "    </table>\n";
+    //     print "      <tr>\n";
+    //     print "        <td>$registro[id]</td>\n";
+    //     print "        <td>$registro[nombre]</td>\n";
+    //     print "        <td>$registro[apellidos]</td>\n";
+    //     print "        <td>$registro[edad]</td>\n";
+    //     print "      </tr>\n";
+    // }
+    // print "    </table>\n";
 
 
 print "<hr>";
@@ -90,14 +90,8 @@ print "<hr>";
     // print "    </table>\n";
 
     // print("<pre>");
-    // //print_r($listaPersonas);
+    // print_r($listaPersonas);
     // print("</pre");
-    
-    
-    
-
-
-
     
 
 
@@ -112,20 +106,21 @@ print "<hr>";
     // print($sentencia->fetchColumn(3) . "<br>");
 
 
-    // $apellido = "Cuello";
-    // print("<h3>¿Cuantos tienen de apellido " . $apellido . "</h3>");
+    $apellido = "Cuello";
+    print("<h3>¿Cuantos tienen de apellido " . $apellido . "</h3>");
 
-    // $sql = "SELECT COUNT(*) FROM personas
-    //             WHERE apellidos LIKE '%$apellido%'";
+    $sql = "SELECT COUNT(*) FROM personas
+           WHERE apellidos LIKE '%$apellido%'";
 
 
-    // try{
-    //     $sentencia = $conexion->query($sql);
-    //     echo "<p>Se han encontrado {$sentencia->fetchColumn()} registro(s)</p>";
-    // }catch(PDOException $e){
-    //     print "Error: No puede conectarse con la base de datos. {$e->getMessage()}";
-    //     die;
-    // }    
+    try{
+        $sentencia = $conexion->query($sql);
+
+        echo "<p>Se han encontrado {$sentencia->fetchColumn()} registro(s)</p>";
+    }catch(PDOException $e){
+        print "Error: No puede conectarse con la base de datos. {$e->getMessage()}";
+        die;
+    }    
     
 
     

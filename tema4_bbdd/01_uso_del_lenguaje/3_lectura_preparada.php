@@ -4,13 +4,11 @@ require_once "funciones.php";
 
 $conexion = conectaDb();
 
-
 try{
 
     //Lista de parametros
     $id = "2";
-    $nombre = "Alicia";
-
+    $nombre = "Alicia"; //;drop table personas";
 
     //Consulta preparada usando ?   El orden sí importa
     // $consulta_preparada1 = "SELECT * FROM personas WHERE id = ? AND nombre = ?";
@@ -19,16 +17,17 @@ try{
     // $sentencia -> bindParam(2,$nombre);
     // $sentencia -> execute();
     
-    // OPCIONAL SIN METODO BINDPARAM -------> $sentencia->execute([$id, $nombre]);
+    // OPCIONAL SIN METODO BINDPARAM -------> 
+    //$sentencia->execute([$id, $nombre]);
 
 
     //Consulta preparada usando :valor   El orden no importa
-    // $consulta_preparada2 = "SELECT * FROM Personas WHERE id = :valor1 AND nombre = :valor2";
+    $consulta_preparada2 = "SELECT * FROM Personas WHERE id = :valor1 AND nombre = :valor2";
 
-    // $sentencia = $conexion->prepare($consulta_preparada2);
-    // $sentencia -> bindParam(":valor2",$nombre);
-    // $sentencia -> bindParam(":valor1",$id);
-    // $sentencia -> execute();
+    $sentencia = $conexion->prepare($consulta_preparada2);
+    $sentencia -> bindParam(":valor2",$nombre);
+    $sentencia -> bindParam(":valor1",$id);
+    $sentencia -> execute();
 
     //OPCIONAL------> $sentencia->execute([":valor2" => $nombre, ":valor1" => $id]);
 
@@ -67,7 +66,7 @@ if ($sentencia->rowCount() == 0) {
 
     //USANDO UN FOREACH
     //OJO, EL BUCLE RECORRE LAS TUPLAS RESULTADO. LUEGO YA NO LAS TENDRÍAMOS
-    foreach ($sentencia as $registro) {
+    while ($registro = $sentencia -> fetch(PDO::FETCH_ASSOC)) {
         print "      <tr>\n";
         print "        <td>$registro[id]</td>\n";
         print "        <td>$registro[nombre]</td>\n";
@@ -79,4 +78,4 @@ if ($sentencia->rowCount() == 0) {
 }
 
 
-$pdo = null;
+$conexion = null;
