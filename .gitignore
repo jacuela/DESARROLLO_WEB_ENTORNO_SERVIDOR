@@ -1,4 +1,6 @@
 .DS_Store
+.vscode
+.gitignore
 
 0_pruebas.php 
 
@@ -6,7 +8,6 @@
 # no subo cualquier carpeta llamada profesor
 profesor/
 otros/
-
 examen/
 
 
