@@ -3,13 +3,13 @@ require_once __DIR__ . "/../config.php";
 
 class Basedatos
 {
-    private $conexionPDO;
+    private ?PDO $conexionPDO;
     private static $instancia; //Singleton patron
-    private $dbmotor;
-    private $host;
-    private $database;
-    private $username;
-    private $password;
+    private string $dbmotor;
+    private string $host;
+    private string $database;
+    private string $username;
+    private string $password;
     
     //Constructor
     private function __construct(){
@@ -18,7 +18,8 @@ class Basedatos
         global $mysqlHost;
         global $mysqlUser;
         global $mysqlPassword; 
-        global $mysqlDatabase; 
+        global $mysqlDatabase;
+
 
         $this->dbmotor = $dbMotor;
         $this->host = $mysqlHost;
@@ -59,14 +60,32 @@ class Basedatos
     }
 
     // Get PDO connection
-    public function getConnection()
+    public function getConnection():PDO
     {
         return $this->conexionPDO;
     }
 
     // Magic method clone is empty to prevent duplication of connection
     private function __clone() { }
+
+    
+    //Metodo para pedirle datos a la base de datos
+    public function get_data($sql, array $parametros=[]):PDOStatement{
+
+        try{
+            $sentencia = $this->conexionPDO->prepare($sql);
+            $sentencia -> execute($parametros);
+            return $sentencia;
+
+        }
+        catch(PDOException $e){
+            echo $e->getMessage();
+            die;
+        }
+
+    }
  
+
 
 
 
