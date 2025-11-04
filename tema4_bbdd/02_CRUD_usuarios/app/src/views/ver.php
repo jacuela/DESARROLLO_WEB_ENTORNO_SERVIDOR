@@ -33,11 +33,11 @@ $registro = $sentencia -> fetch (PDO::FETCH_OBJ);
 <body>
     <?php include 'menu.php';?>
     <h2>Detalles del usuario</h2>
-    <p>ID:<?= $registro->id?></p>
-    <p>Nombre:<?= $registro->nombre?></p>
-    <p>Apellidos:<?= $registro->apellidos?></p>
-    <p>Usuario:<?= $registro->usuario?></p>
-    <p>Fecha nacimiento:<?php 
+    <p><b>ID:</b><?= $registro->id?></p>
+    <p><b>Nombre:</b><?= $registro->nombre?></p>
+    <p><b>Apellidos:</b><?= $registro->apellidos?></p>
+    <p><b>Usuario:</b><?= $registro->usuario?></p>
+    <p><b>Fecha nacimiento:</b><?php 
                             $fechaDT = new DateTime($registro->fecha_nac);
                             echo $fechaDT->format('d/m/Y');
                         ?></p>
