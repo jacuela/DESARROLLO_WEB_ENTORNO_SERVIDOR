@@ -91,22 +91,22 @@ class Basedatos
     //Método para insertar un usuario en la bbdd
     public function crear_usuario(Usuario $_usuario){
 
-        // $nombre = $_usuario->nombre;
-        // $apellidos = $_usuario->apellidos;
-        // $usuario = $_usuario->usuario;
-        // $password = $_usuario->password;
-        //$fecha_nac = $_usuario->fecha_nac->format("Y-m-d");
+        $nombre = $_usuario->nombre;
+        $apellidos = $_usuario->apellidos;
+        $usuario = $_usuario->usuario;
+        $password = $_usuario->password;
+        $fecha_nac = $_usuario->fecha_nac->format("Y-m-d");
 
         $sql = "INSERT INTO usuarios (nombre, apellidos, usuario, password, fecha_nac) 
              VALUES (:nombre, :apellidos, :usuario, :password, :fecha_nac)";
 
         try{
             $sentencia = $this->conexionPDO->prepare($sql);
-            $sentencia -> bindParam(":nombre",$_usuario->nombre);
-            $sentencia -> bindParam(":apellidos",$_usuario->apellidos);
-            $sentencia -> bindParam(":usuario",$_usuario->usuario);
-            $sentencia -> bindParam(":password",$_usuario->password);
-            $sentencia -> bindParam(":fecha_nac",$_usuario->fecha_nac->format("Y-m-d"));
+            $sentencia -> bindParam(":nombre",$nombre);
+            $sentencia -> bindParam(":apellidos",$apellidos);
+            $sentencia -> bindParam(":usuario",$usuario);
+            $sentencia -> bindParam(":password",$password);
+            $sentencia -> bindParam(":fecha_nac",$fecha_nac);
             $sentencia -> execute();
             return true;
 
@@ -121,12 +121,6 @@ class Basedatos
 
     //Método para BORRAR un usuario en la bbdd
     public function borrar_usuario(int $_id){
-
-        // $nombre = $_usuario->nombre;
-        // $apellidos = $_usuario->apellidos;
-        // $usuario = $_usuario->usuario;
-        // $password = $_usuario->password;
-        //$fecha_nac = $_usuario->fecha_nac->format("Y-m-d");
 
         $sql = "DELETE FROM usuarios WHERE id = :id";
 
