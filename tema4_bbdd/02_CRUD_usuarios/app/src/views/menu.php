@@ -2,7 +2,7 @@
 <nav>
   <ul>
     <li><a href="listado.php">Listado</a></li>
-    <li><a href="alta-usuario.php">Alta de Usuario</a></li>
+    <li><a href="alta.php">Alta de Usuario</a></li>
   </ul>
   <br>
 </nav>

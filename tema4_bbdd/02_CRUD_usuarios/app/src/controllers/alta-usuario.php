@@ -1,8 +1,8 @@
 <?php
 
 session_start();
-require_once "../models/basedatos.php";
-require_once "../models/usuario.php";
+require_once __DIR__ . "/../models/basedatos.php";
+require_once __DIR__ . "/../models/usuario.php";
 
 if ($_SERVER["REQUEST_METHOD"] != "POST") {
     die;
@@ -26,8 +26,12 @@ else
         $passwordCifrado,
         new DateTime($fecha_nac));
     
+    $dbInstancia = Basedatos::getInstance(); //por singleton    
+    
+    $dbInstancia->crear_usuario($usuario);
 
-        
+    header ("Location: ../views/listado.php");
+    die;    
 }
         
 

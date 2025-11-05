@@ -21,7 +21,7 @@ if (!isset ($_SESSION["conectado"]) || !$_SESSION["conectado"]){
 
 <h2>Alta de usuarios</h1>
 
-<form action="alta-usuario.php" method="POST">
+<form action="../controllers/alta-usuario.php" method="POST">
     <p>
     <label for="nombre">Nombre:</label>
     <input type="text" id="nombre" name="nombre">

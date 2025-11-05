@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require_once "../models/basedatos.php";
+require_once __DIR__ . "/../models/basedatos.php";
 
 if (!isset ($_SESSION["conectado"]) || !$_SESSION["conectado"]){
     header ("Location: ../../public/index.php");
@@ -18,6 +18,16 @@ $sentencia = $dbInstancia->get_data($sql, $parametros);
 
 $registro = $sentencia -> fetch (PDO::FETCH_OBJ);
 
+$usuario = new Usuario( 
+        $registro->id,
+        $registro->nombre,
+        $registro->apellidos,
+        $registro->usuario,
+        $registro->password,
+        new DateTime($registro->fecha_nac)
+    );
+
+
 //var_dump($registro);
 
 ?>
@@ -33,14 +43,13 @@ $registro = $sentencia -> fetch (PDO::FETCH_OBJ);
 <body>
     <?php include 'menu.php';?>
     <h2>Detalles del usuario</h2>
-    <p><b>ID:</b><?= $registro->id?></p>
-    <p><b>Nombre:</b><?= $registro->nombre?></p>
-    <p><b>Apellidos:</b><?= $registro->apellidos?></p>
-    <p><b>Usuario:</b><?= $registro->usuario?></p>
-    <p><b>Fecha nacimiento:</b><?php 
-                            $fechaDT = new DateTime($registro->fecha_nac);
-                            echo $fechaDT->format('d/m/Y');
-                        ?></p>
+    <p><b>ID:</b><?= $usuario->id?></p>
+    <p><b>Nombre:</b><?= $usuario->nombre?></p>
+    <p><b>Apellidos:</b><?= $usuario->apellidos?></p>
+    <p><b>Usuario:</b><?= $usuario->usuario?></p>
+    <p><b>Fecha nacimiento:</b><?= $usuario->fecha_nac->format('d/m/Y') ?></p>
+    <p><b>Edad:</b><?= $usuario->getEdad() ?></p>
+    
     
 
 

@@ -1,5 +1,7 @@
 <?php
 require_once __DIR__ . "/../config.php";
+require_once __DIR__ . "/usuario.php";
+
 
 class Basedatos
 {
@@ -69,8 +71,8 @@ class Basedatos
     private function __clone() { }
 
     
-    //Metodo para pedirle datos a la base de datos
-    public function get_data($sql, array $parametros=[]):PDOStatement{
+    //Metodo GENERICO para pedirle datos a la base de datos
+    public function get_data(string $sql, array $parametros=[]):PDOStatement{
 
         try{
             $sentencia = $this->conexionPDO->prepare($sql);
@@ -84,6 +86,69 @@ class Basedatos
         }
 
     }
+
+
+    //Método para insertar un usuario en la bbdd
+    public function crear_usuario(Usuario $_usuario){
+
+        // $nombre = $_usuario->nombre;
+        // $apellidos = $_usuario->apellidos;
+        // $usuario = $_usuario->usuario;
+        // $password = $_usuario->password;
+        //$fecha_nac = $_usuario->fecha_nac->format("Y-m-d");
+
+        $sql = "INSERT INTO usuarios (nombre, apellidos, usuario, password, fecha_nac) 
+             VALUES (:nombre, :apellidos, :usuario, :password, :fecha_nac)";
+
+        try{
+            $sentencia = $this->conexionPDO->prepare($sql);
+            $sentencia -> bindParam(":nombre",$_usuario->nombre);
+            $sentencia -> bindParam(":apellidos",$_usuario->apellidos);
+            $sentencia -> bindParam(":usuario",$_usuario->usuario);
+            $sentencia -> bindParam(":password",$_usuario->password);
+            $sentencia -> bindParam(":fecha_nac",$_usuario->fecha_nac->format("Y-m-d"));
+            $sentencia -> execute();
+            return true;
+
+        }
+        catch(PDOException $e){
+            echo $e->getMessage();
+            return false;
+            //die;
+        }
+
+    }
+
+    //Método para BORRAR un usuario en la bbdd
+    public function borrar_usuario(int $_id){
+
+        // $nombre = $_usuario->nombre;
+        // $apellidos = $_usuario->apellidos;
+        // $usuario = $_usuario->usuario;
+        // $password = $_usuario->password;
+        //$fecha_nac = $_usuario->fecha_nac->format("Y-m-d");
+
+        $sql = "DELETE FROM usuarios WHERE id = :id";
+
+        try{
+            $sentencia = $this->conexionPDO->prepare($sql);
+            $sentencia -> bindParam(":id",$_id);
+            $sentencia -> execute();
+            return true;
+
+        }
+        catch(PDOException $e){
+            echo $e->getMessage();
+            //return false;
+            die;
+        }
+
+    }
+
+
+
+
+
  
 
 

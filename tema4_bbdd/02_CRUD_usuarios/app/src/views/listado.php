@@ -1,8 +1,8 @@
 <?php
 session_start();
 
-require_once "../models/basedatos.php";
-require_once "../models/usuario.php";
+require_once __DIR__ . "/../models/basedatos.php";
+require_once __DIR__ . "/../models/usuario.php";
 
 
 if (!isset ($_SESSION["conectado"]) || !$_SESSION["conectado"]){
@@ -48,7 +48,6 @@ $sentencia = $dbInstancia->get_data($sql);
                         $registroPDO->usuario,
                         $registroPDO->password,
                         new DateTime($registroPDO->fecha_nac));
-                       
             ?>
                 
             <tr>
@@ -63,13 +62,13 @@ $sentencia = $dbInstancia->get_data($sql);
                         <a href="ver.php?id=<?= $usuario->id?>"><button>VER</button></a> 
                         
                         <!-- BOTON BORRAR -->
-                        <form action="../controllers/borrar.php" method="POST">
+                        <form action="../controllers/borrar-usuario.php" method="POST">
                         <input type="hidden" name="id" value="<?=$usuario->id?>"> 
                         <button type="submit">BORRAR</button>
                         </form>
 
                         <!-- BOTON ACTUALIZAR -->
-                        <form action="../controllers/actualizar.php" method="POST">
+                        <form action="../controllers/actualizar-usuario.php" method="POST">
                         <input type="hidden" name="id" value="<?=$usuario->id?>"> 
                         <button type="submit">ACTUALIZAR</button>
                         </form>
