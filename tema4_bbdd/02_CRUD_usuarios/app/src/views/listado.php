@@ -68,7 +68,7 @@ $sentencia = $dbInstancia->get_data($sql);
                         </form>
 
                         <!-- BOTON ACTUALIZAR -->
-                        <form action="../controllers/actualizar-usuario.php" method="POST">
+                        <form action="./actualiza.php" method="POST">
                         <input type="hidden" name="id" value="<?=$usuario->id?>"> 
                         <button type="submit">ACTUALIZAR</button>
                         </form>

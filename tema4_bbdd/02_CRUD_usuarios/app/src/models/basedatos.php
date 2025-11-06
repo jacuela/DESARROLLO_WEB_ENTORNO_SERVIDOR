@@ -89,12 +89,12 @@ class Basedatos
 
 
     //Método para insertar un usuario en la bbdd
-    public function crear_usuario(Usuario $_usuario){
+    public function crear_usuario(Usuario $_usuario){ 
 
         $nombre = $_usuario->nombre;
         $apellidos = $_usuario->apellidos;
         $usuario = $_usuario->usuario;
-        $password = $_usuario->password;
+        $password = $_usuario->password; 
         $fecha_nac = $_usuario->fecha_nac->format("Y-m-d");
 
         $sql = "INSERT INTO usuarios (nombre, apellidos, usuario, password, fecha_nac) 
@@ -139,17 +139,66 @@ class Basedatos
 
     }
 
+    //Método para ACTUALIZAR un usuario en la bbdd
+    public function actualizar_usuario(Usuario $_usuario){
+
+        
+
+        $id = $_usuario->id;
+        $nombre = $_usuario->nombre;
+        $apellidos = $_usuario->apellidos;
+        $usuario = $_usuario->usuario;
+        $password = $_usuario->password; //si es NULL, no queremos actualizarlo
+        $fecha_nac = $_usuario->fecha_nac->format("Y-m-d");
+
+        if (is_null($password)){
+            //Actualizamos todo menos el password
+             $sql = "UPDATE usuarios
+                     SET    nombre = :nombre,
+                            apellidos = :apellidos,
+                            usuario = :usuario,
+                            fecha_nac = :fecha_nac
+                    WHERE id = :id";
+
+        }
+        else{
+            //Actualizamos todo
+            $sql = "UPDATE usuarios
+                    SET     nombre = :nombre,
+                            apellidos = :apellidos,
+                            usuario = :usuario,
+                            password = :password,
+                            fecha_nac = :fecha_nac
+                    WHERE id = :id";
+
+        }
+
+        try{
+            $sentencia = $this->conexionPDO->prepare($sql);
+            $sentencia -> bindParam(":id",$id);
+            $sentencia -> bindParam(":nombre",$nombre);
+            $sentencia -> bindParam(":apellidos",$apellidos);
+            $sentencia -> bindParam(":usuario",$usuario);
+            if (!is_null($password)){
+                $sentencia -> bindParam(":password",$password);
+            }    
+            $sentencia -> bindParam(":fecha_nac",$fecha_nac);
+            
+            var_dump($sentencia->queryString);
+            
+            $sentencia -> execute();
 
 
+            return true;
 
+        }
+        catch(PDOException $e){
+            echo $e->getMessage();
+            //return false;
+            die;
+        }
 
- 
-
-
-
-
-
-
+    }
 
 }
 

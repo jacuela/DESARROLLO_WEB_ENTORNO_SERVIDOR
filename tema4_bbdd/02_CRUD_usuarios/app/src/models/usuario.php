@@ -6,11 +6,11 @@ class Usuario implements JsonSerializable {
     private string $nombre;
     private string $apellidos;
     private string $usuario;
-    private string $password;   //Se guarda cifrado
+    private string | null $password;   //Se guarda cifrado
     private DateTime $fecha_nac;
 
     //Constructor
-    public function __construct(int | null $id, string $nombre, string $apellidos, string $usuario, string $passwordCifrado, DateTime $fecha_nac) {
+    public function __construct(int | null $id, string $nombre, string $apellidos, string $usuario, string | null $passwordCifrado, DateTime $fecha_nac) {
         $this->id = $id;
         $this->nombre = $nombre;
         $this->apellidos = $apellidos;
