@@ -133,16 +133,14 @@ class Basedatos
         }
         catch(PDOException $e){
             echo $e->getMessage();
-            //return false;
-            die;
+            return false;
+            //die;
         }
 
     }
 
     //Método para ACTUALIZAR un usuario en la bbdd
     public function actualizar_usuario(Usuario $_usuario){
-
-        
 
         $id = $_usuario->id;
         $nombre = $_usuario->nombre;
