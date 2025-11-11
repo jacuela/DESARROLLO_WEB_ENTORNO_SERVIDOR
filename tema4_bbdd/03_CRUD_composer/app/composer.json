@@ -1,0 +1,22 @@
+{
+    "name": "juanantoniocuelloalarcon/app",
+    "description": "CRUD de usuarios",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        },
+        "files": [
+            "src/helpers/funciones.php"
+        ]
+    },
+    "authors": [
+        {
+            "name": "Juan Antonio Cuello",
+            "email": "jacuela@gmail.com"
+        }
+    ],
+    "require": {
+        "monolog/monolog": "^3.9"
+    }
+}

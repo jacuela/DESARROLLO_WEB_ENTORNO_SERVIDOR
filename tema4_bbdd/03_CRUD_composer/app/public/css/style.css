@@ -1,0 +1,7 @@
+.tabla{
+    border-collapse: collapse;
+}
+
+.tabla td{
+    padding: 10px;
+}
