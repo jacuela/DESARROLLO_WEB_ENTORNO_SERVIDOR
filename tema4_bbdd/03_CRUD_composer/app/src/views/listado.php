@@ -17,6 +17,8 @@ $sql = "SELECT * FROM usuarios";
 $sentencia = $dbInstancia->get_data($sql);
 
 
+saludar();
+
 ?>
 
 <!DOCTYPE html>
