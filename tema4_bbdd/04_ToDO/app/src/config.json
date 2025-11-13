@@ -4,5 +4,6 @@
     "mysqlUser": "root",
     "mysqlPassword": "",
     "mysqlDatabase": "todo_db"
+    
 }
 
