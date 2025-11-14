@@ -1,3 +1,21 @@
+<?php 
+session_start();
+require __DIR__ . '/../../vendor/autoload.php';
+use App\models\Basedatos;
+use App\models\Tarea;
+
+if (!$_SESSION["conectado"]){
+    header ("Location: ../../public/index.php");
+    die;
+}
+
+//Conectamos con la base de datos para trear la lista de tareas
+$db = new Basedatos();
+
+$sql = "SELECT * FROM tareas";
+$sentencia = $db->get_data($sql);
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -10,27 +28,51 @@
 <body>
     <h1>LISTADO DE TAREAS</h1>
 
-    <form action="PARA AÑADIR LA TAREA" method="POST" class="form-add">
+    <form action="../controllers/add_tarea.php" method="POST" class="form-add">
         <input type="text" name="descripcion" placeholder="Nueva tarea..." required>
         <button type="submit">Añadir</button>
     </form>
 
     <ul class="task-list">
+
+        <?php 
+            //Voy recorriendo las taras
+            while ($registro = $sentencia -> fetch(PDO::FETCH_OBJ)):
+                $t = new Tarea($registro->id, $registro->descripcion, $registro->completada);
+                
+                //Para usar la fecha de la base de datos
+                $t->fecha_creacion = new DateTime($registro->fecha_creacion);
+        ?>        
+
         <li class="<?= $t->completada ? 'done' : '' ?>">
             <?= ($t->descripcion) ?>
+            <?= ($t->fecha_creacion->format("d/m/Y")) ?>
 
-            <?php if (!$t->completada): ?>
-                <form action="PARA COMPLETAR LA TAREA" method="POST" class="inline">
+            <!-- BOTON COMPLETAR -->
+            <?php //if (!$t->completada): ?>
+                <!-- <form action="../controllers/completar_tarea.php" method="POST" class="inline">
                     <input type="hidden" name="id" value="<?= $t->id ?>">
                     <button type="submit">✔</button>
-                </form>
-            <?php endif; ?>
+                </form> -->
+            <?php //endif; ?>
 
-            <form action="PARA BORRAR LA TAREA" method="POST" class="inline">
+             <!-- BOTON ACTUALIZAR -->
+            
+                <form action="../controllers/actualizar_tarea.php" method="POST" class="inline">
+                    <input type="hidden" name="id" value="<?= $t->id ?>">
+                    <input type="hidden" name="estado" value="<?= $t->completada ?>">
+                    <button type="submit">✔</button>
+                </form>
+            
+
+            <!-- BOTON BORRAR -->
+            <form action="../controllers/borrar_tarea.php" method="POST" class="inline">
                 <input type="hidden" name="id" value="<?= $t->id ?>">
                 <button type="submit">🗑️</button>
             </form>
         </li>
+
+        <?php endwhile; ?>
    
     </ul>
     
