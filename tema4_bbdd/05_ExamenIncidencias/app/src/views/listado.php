@@ -1,4 +1,34 @@
+<?php
+session_start();
+require __DIR__ . "/../../vendor/autoload.php";
 
+
+use App\models\Basedatos;
+use App\models\Incidencia;
+
+$basedatos = new Basedatos();
+ 
+$rol = $_SESSION["usuario"]["rol"];
+$id = $_SESSION["usuario"]["id"];
+
+if ($rol === "admin"){
+    $sql = "SELECT * FROM incidencia"; 
+    $statement = $basedatos -> get_data($sql);
+}
+else{
+    $sql = "SELECT * FROM incidencia WHERE id_usuario = :id ";
+    $parametros = [":id" => $id];
+    $statement = $basedatos -> get_data($sql, $parametros);
+}
+
+// $todos_los_datos = $statement -> fetchAll();
+
+// print("<pre>");
+// print_r($todos_los_datos);
+// print("</pre>");
+
+
+?>
 
 
 <!DOCTYPE html>
@@ -14,6 +44,8 @@
         <h1>GESTOR DE INCIDENCIAS</h1>
     </header>
     
+    <?php include 'menu.php'; ?>
+
     <main>
         
         <div class="tabla-contenedor">
@@ -28,11 +60,31 @@
         </thead>
         <tbody>
         
-            <tr class='fondo-verde'> |  <tr class='fondo-rojo'>    
-                
-                <td></td> <!-- campo titulo -->
-                <td></td> <!-- campo nivel -->
-                <td></td> <!-- campo propietario -->
+            <?php
+                while ($registroInc = $statement -> fetch(PDO::FETCH_OBJ)):
+                    $incidencia = new Incidencia(
+                        $registroInc->id,
+                        $registroInc->titulo,
+                        $registroInc->descripcion,
+                        $registroInc->nivel,
+                        $registroInc->resuelta,
+                        $registroInc->resolucion,
+                        $registroInc->id_usuario
+                    );
+            ?>
+
+            <?php   
+            if ($incidencia->resuelta){
+                echo ("<tr class='fondo-verde'>");
+            }
+            else{
+                echo ("<tr class='fondo-rojo'>");
+            }
+            ?>
+    
+                <td><?=  $registroInc->titulo ?></td> <!-- campo titulo -->
+                <td><?=  $registroInc->nivel ?></td> <!-- campo nivel -->
+                <td><?=  nombre_dado_id($registroInc->id_usuario) ?></td> <!-- campo propietario -->
                 <!-- campo accion -->
                 <td>
                         <!-- BOTON VER -->
@@ -40,6 +92,10 @@
                 </td>
 
             </tr>
+            <?php endwhile; ?>
+
+
+
         </tbody>
         </table>
         </div> 

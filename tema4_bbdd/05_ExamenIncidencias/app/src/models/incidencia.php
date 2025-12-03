@@ -1,4 +1,5 @@
 <?php 
+namespace App\models;
 
 class Incidencia{
     public int $id;
