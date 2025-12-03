@@ -1,0 +1,23 @@
+{
+    "name": "juanantoniocuelloalarcon/repaso_composer",
+    "description": "Repaso de composer",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        },
+        "files":[
+            "src/ayuda/funciones.php"
+        ]
+    },
+    "authors": [
+        {
+            "name": "Juan Antonio Cuello",
+            "email": "jacuela@gmail.com"
+        }
+    ],
+    "require": {
+        "monolog/monolog": "^3.9",
+        "mpdf/mpdf": "^8.2"
+    }
+}

@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "dwes",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}

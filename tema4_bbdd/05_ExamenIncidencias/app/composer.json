@@ -1,0 +1,22 @@
+{
+    "name": "juanantoniocuelloalarcon/app",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        },
+        "files":[
+            "src/helpers/ayuda.php"
+        ]
+    },
+    "authors": [
+        {
+            "name": "Juan Antonio Cuello",
+            "email": "jacuela@gmail.com"
+        }
+    ],
+    "require": {
+        "monolog/monolog": "^3.9",
+        "mpdf/mpdf": "^8.2"
+    }
+}
