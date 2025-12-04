@@ -82,13 +82,13 @@ else{
             }
             ?>
     
-                <td><?=  $registroInc->titulo ?></td> <!-- campo titulo -->
-                <td><?=  $registroInc->nivel ?></td> <!-- campo nivel -->
-                <td><?=  nombre_dado_id($registroInc->id_usuario) ?></td> <!-- campo propietario -->
+                <td><?=  $incidencia->titulo ?></td> <!-- campo titulo -->
+                <td><?=  $incidencia->nivel ?></td> <!-- campo nivel -->
+                <td><?=  nombre_dado_id($incidencia->id_usuario) ?></td> <!-- campo propietario -->
                 <!-- campo accion -->
                 <td>
                         <!-- BOTON VER -->
-                        <a href=""><button>VER</button></a> 
+                        <a href="ver.php?id=<?= $incidencia->id ?>"><button>VER</button></a> 
                 </td>
 
             </tr>
