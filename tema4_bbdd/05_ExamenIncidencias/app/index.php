@@ -30,6 +30,9 @@ else{
     <h2><?= $mensaje ?></h2> 
     <div>
     <!-- boton para generar la bbdd -->
+    <form method="POST" action="./src/controllers/crear_db.php">    
+    <button id="btnCrear">Crear Base de Datos</button>
+    </form>
     </div> 
 </body>
 </html>

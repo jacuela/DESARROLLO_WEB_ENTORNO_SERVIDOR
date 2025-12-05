@@ -109,12 +109,12 @@ else{
             <br><br>    
             <!-- crea el formulario/enlace, hazlo como quieras con el atributo target="_blank" para que
                  se abra en otra pestaña -->
-            
+            <form action="./../controllers/generar_estadisticas.php">
                 <button type="submit" 
                     style="background-color:#0275d8; color:white; padding:10px 18px; border:none; border-radius:5px; cursor:pointer;">
                     GENERAR ESTADÍSTICAS EN PDF
                 </button> 
-            
+            </form>
             </div>
     </main>
 

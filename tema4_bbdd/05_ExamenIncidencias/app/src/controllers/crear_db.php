@@ -1,9 +1,17 @@
 <?php
 
 // 🔹 Cargar configuración desde JSON
+$archivoConfig = __DIR__ . "/../config/config.json";
 
+$config = json_decode(file_get_contents($archivoConfig), true);
 
-//DSN ejemplo sin indicar la base datos: 'mysql:host=localhost;charset=utf8mb4'
+$motor = $config["dbMotor"];
+$host = $config["mysqlHost"];
+$user = $config["mysqlUser"];
+$password = $config["mysqlPassword"];
+$database = $config["mysqlDatabase"];
+
+$dsn = "$motor:host=$host;charset=utf8mb4";
 
 
 try{

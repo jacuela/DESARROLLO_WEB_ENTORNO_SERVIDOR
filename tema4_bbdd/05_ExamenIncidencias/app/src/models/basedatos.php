@@ -86,6 +86,29 @@ class Basedatos
         
     }    
 
+    public function resolver_incidencia(int $id, string $resolucion){
+        $sql = "UPDATE incidencia 
+                SET resuelta = TRUE, resolucion = :resolucion 
+                WHERE id = :id";        
+
+        try{
+            $sentencia = $this->conexionPDO->prepare($sql);
+            $sentencia -> bindParam(":id",$id);
+            $sentencia -> bindParam(":resolucion",$resolucion);
+            $sentencia -> execute();
+            return true;
+
+        }catch (PDOException $e){
+            enviar_log($e->getMessage(),"error");
+            return false;
+        }
+
+
+
+
+
+
+    }
 
 
 

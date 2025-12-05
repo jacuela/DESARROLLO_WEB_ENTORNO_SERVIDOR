@@ -1,5 +1,20 @@
 <?php
 
+require __DIR__ . "/../../vendor/autoload.php";
+
+use App\models\Basedatos;
+use Mpdf\Mpdf;
+
+$basedatos = new Basedatos();
+
+$sqlTotal = "SELECT COUNT(*) FROM incidencia";
+$sqlResueltas = "SELECT COUNT(*) FROM incidencia WHERE resuelta = 1";
+$sqlSinResolver = "SELECT COUNT(*) FROM incidencia WHERE resuelta = 0";
+
+$total = $basedatos->get_data($sqlTotal)->fetchColumn();
+$resueltas = $basedatos->get_data($sqlResueltas)->fetchColumn();
+$sinResolver = $basedatos->get_data($sqlSinResolver)->fetchColumn();
+
 //=============== AYUDA ========================================
 
 // // Consultas a realizar
@@ -12,7 +27,7 @@
 // $valor = $statement->fetchColumn();
 
 // //Tambien se puede concatenar la llamada
-// $valor = $db->consulta($sql)->fetchColumn();
+//$valor = $db->consulta($sql)->fetchColumn();
 
 
 
@@ -35,7 +50,11 @@ $html = "
 
 // Crear el PDF
 //1.crear al objeto
+$mpdf = new Mpdf();
+
 //2.llamar a writeHTML con el html a generar
+$mpdf->WriteHTML($html);
+
 //3.mostrar el pdf. Hazo así con estos parámetros
 $mpdf->Output("estadisticas_incidencias.pdf", "I"); // I = inline (en el navegador)
 

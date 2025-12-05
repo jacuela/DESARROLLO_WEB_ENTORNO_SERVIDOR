@@ -17,6 +17,8 @@ if ($boton === "volver"){
     die;
 }
 
+
+
 if ($resolucion === "sin resolver"){
     $_SESSION["error-resolucion"]="Debes indicar una resolucion";
     header ("Location: ./../views/ver.php?id=$id");
@@ -24,11 +26,11 @@ if ($resolucion === "sin resolver"){
 }
 
 
+
 if ($boton !== "volver"){
     $db = new Basedatos();
     if ($db->resolver_incidencia($id, $resolucion)){
          enviar_log("Incidencia con id=$id resuelta","info");
-
     }
    
 }
