@@ -1,0 +1,20 @@
+{
+    "name": "juanantoniocuelloalarcon/api",
+    "description": "API empleados",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        },
+        "files":[
+            "src/routes.php"
+        ]
+    },
+    "authors": [
+        {
+            "name": "Juan Antonio Cuello",
+            "email": "jacuela@gmail.com"
+        }
+    ],
+    "require": {}
+}

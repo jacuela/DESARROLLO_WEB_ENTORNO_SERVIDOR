@@ -1,5 +1,7 @@
 <?php
 
+require __DIR__ . "/vendor/autoload.php";
+
 header("Access-Control-Allow-Origin: *");
 
 header("Content-Type: application/json; charset=UTF-8");
@@ -18,45 +20,12 @@ $requestMethod = $_SERVER["REQUEST_METHOD"];
 //echo ($param);echo ("\n");
 //echo ($requestMethod);echo ("\n");
 
-$partes = explode('/', $uri);
-//print_r($partes);
-
-
-if ($partes[4] !== 'api' || $partes[5] != 'empleados'){
-    //No existe dicho endpoint
-    header("HTTP/1.1 400 Bad Request");
-    $respuesta = ['mensaje' => 'No existe el endpoint'];
-    echo json_encode($respuesta);
-    die;
-}
-
-//Miramos si hemos pedido usuario
-$userId = $partes[6] ?? null;
-
-// if ($userId == null){
-//     echo "no he metido usuario";
-// }else{
-//     echo ("he pedido el usuario con id $userId");
-// }
-
-
-//Router analizador de petición
-switch ($requestMethod){
-    case 'GET':
-        
-
-
-    break;
-
-    default:
+manejarRequest($uri, $requestMethod, $param);
 
 
 
 
 
-
-
-}
 
 
 
