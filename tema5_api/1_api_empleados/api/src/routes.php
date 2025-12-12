@@ -66,6 +66,17 @@ function manejarRequest($uri, $requestMethod, $param){
             }
             break;
 
+        case 'POST':
+            //-------------------------------
+            //Endpoint POST /api/empleados/
+            //-------------------------------
+            $data = json_decode(file_get_contents('php://input'), TRUE);    
+            
+            //....................
+            
+            break;
+
+
         default:
             header("HTTP/1.1 400 Bad Request");
             $respuesta = ['mensaje' => 'No existe el endpoint'];
