@@ -4,8 +4,8 @@
 function manejarRequest($uri, $requestMethod, $param){
 
     $partes = explode('/', $uri);
-    print_r($partes);
-    die;
+    //print_r($partes);
+    //die;
 
     if ($partes[4] !== 'api' || $partes[5] != 'empleados'){
         //No existe dicho endpoint
@@ -25,7 +25,7 @@ function manejarRequest($uri, $requestMethod, $param){
             //---------------------------
             //endpoint /api/empleados/X
             //---------------------------
-            if ($userId !== null){
+            if ($userId !== null && $userId != "" ){
 
                 header("HTTP/1.1 200 OK");
                 $respuesta = ["mensaje" => "Mando al empleado $userId"];
