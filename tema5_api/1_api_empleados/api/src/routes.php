@@ -72,9 +72,47 @@ function manejarRequest($uri, $requestMethod, $param){
             //-------------------------------
             $data = json_decode(file_get_contents('php://input'), TRUE);    
             
-            //....................
+            //Añadir datos a la bbdd
+            $insercionOK = $bd->insertarEmpleado($data);
+            if ($insercionOK) {
+                $respuesta = ['mensaje' => "Empleado añadido."];
+                http_response_code(201);
+                echo json_encode($respuesta);
+                exit();
+            } else {
+                $respuesta = ['error' => 'Error al añadir persona.'];
+                http_response_code(500);
+                echo json_encode($respuesta);
+                exit();
+            }
             
             break;
+
+        case 'DELETE':
+            //-------------------------------
+            //Endpoint DELETE /api/empleados/X
+            //-------------------------------
+            
+            if ($userId !== null && $userId != "" ){
+                //Añadir datos a la bbdd
+                $borradoOK = $bd->borrarEmpleado($userId);
+                if ($borradoOK) {
+                    $respuesta = ['mensaje' => "Empleado con id $userId borrado."];
+                    http_response_code(200);
+                    echo json_encode($respuesta);
+                    exit();
+                } else {
+                    $respuesta = ['error' => 'Error al añadir persona.'];
+                    http_response_code(500);
+                    echo json_encode($respuesta);
+                    exit();
+                }
+
+            }
+           
+            break;
+
+        
 
 
         default:

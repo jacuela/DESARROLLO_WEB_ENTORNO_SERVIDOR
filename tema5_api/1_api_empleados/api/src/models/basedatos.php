@@ -32,6 +32,7 @@ class Basedatos
         }
         catch (PDOException $e){
             $this->conexionPDO = null;
+            enviar_log($e->getMessage(),"error");
         }
             
     }//fin constructor
@@ -56,59 +57,61 @@ class Basedatos
 
         }
         catch(PDOException $e){
+            enviar_log($e->getMessage(),"error");
             return null;
         }
 
     }
 
-    //Método para insertar un usuario en la bbdd
-    // public function crear_tarea(Tarea $_tarea){ 
 
-    //     $sql = "INSERT INTO tareas (descripcion) VALUES (:descripcion)";
-    //     $descripcion = $_tarea->getDescripcion();
-    //     try{
-    //         $sentencia = $this->conexionPDO->prepare($sql);
-    //         $sentencia -> bindParam(":descripcion",$descripcion);
-    //         $sentencia -> execute();
-    //         return true;
+    //Metodo para añadir elemento a la bbdd INSERT
+    public function insertarEmpleado(array $empleadoASOC){
 
-    //     }
-    //     catch(PDOException $e){
-    //         $this->log->error("Error en CREAR TAREA");
-    //         $this->log->error($e->getMessage(), ['archivo:' => 'basedatos.php']);
-    //         return false;
-            
-    //     }
+        $sql = "INSERT INTO empleados  (`nombre`, `direccion`, `salario`)
+                VALUES (:nombre, :direccion, :salario)";
 
-    //  }
+        try{
+            $sentencia = $this->conexionPDO->prepare($sql);
+            $sentencia -> bindParam(":nombre",$empleadoASOC["nombre"]);
+            $sentencia -> bindParam(":direccion",$empleadoASOC["direccion"]);
+            $sentencia -> bindParam(":salario",$empleadoASOC["salario"]);
+            $sentencia -> execute();
+            enviar_log("Usuario añadido correctamente","info");
+            return true;
 
-     //Método para BORRAR un usuario en la bbdd
-    // public function borrar_tarea(int $_id){
+        }
+        catch(PDOException $e){
+            enviar_log($e->getMessage(),"error");
+            return false;
+        }
 
-    //     $sql = "DELETE FROM tareas WHERE id = :id";
-    //     $id = $_id;
-
-    //     try{
-    //         $sentencia = $this->conexionPDO->prepare($sql);
-    //         $sentencia -> bindParam(":id",$id);
-    //         $sentencia -> execute();  //$sentencia -> execute([":id" => $id]);
-    //         return true;
-
-    //     }
-    //     catch(PDOException $e){
-    //         $this->log->error("Error en BORRAR TAREA");
-    //         $this->log->error($e->getMessage(), ['archivo:' => 'basedatos.php']);
-    //         return false;
-            
-    //     }
-
-    // }//fin borrar tarea
-
-
+    }
     
+    //Metodo para borrar un empleado de la bbdd DELETE
+    public function borrarEmpleado(int $id_){
 
+        //NOTA: si no existe el id a borrar, no da error. Por log log, puede parecer
+        //que se acaba de borrar el empleado.
+        //Habria que controlar si se quiere ser mas exacto el resultado de la consulta.
 
-    
+        $sql = "DELETE FROM empleados WHERE id = :id";
+        
+        
+        try{
+            $sentencia = $this->conexionPDO->prepare($sql);
+            $sentencia -> bindParam(":id",$id_);
+            $sentencia -> execute();
+            enviar_log("Usuario con id $id_ borrado correctamente","info");
+            return true;
+
+        }
+        catch(PDOException $e){
+            enviar_log($e->getMessage(),"error");
+            return false;
+        }
+
+    }
+
 
 } //fin clase
 

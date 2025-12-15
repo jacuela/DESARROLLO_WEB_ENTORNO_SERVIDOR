@@ -7,7 +7,8 @@
             "App\\": "src/"
         },
         "files":[
-            "src/routes.php"
+            "src/routes.php",
+            "src/helpers/ayuda.php"
         ]
     },
     "authors": [
@@ -16,5 +17,7 @@
             "email": "jacuela@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "monolog/monolog": "^3.9"
+    }
 }
