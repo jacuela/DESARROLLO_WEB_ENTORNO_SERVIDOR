@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Empleados - Frontend JS</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 60%;
+        }
+        th, td {
+            border: 1px solid #333;
+            padding: 6px;
+        }
+        th {
+            background-color: #eee;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Listado de empleados</h1>
+
+<button onclick="cargarEmpleados()">Ver todos</button>
+
+<h2>Buscar empleado por ID</h2>
+<input type="number" id="idEmpleado">
+<button onclick="buscarEmpleado()">Buscar</button>
+
+<br><br>
+
+<table>
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Dirección</th>
+            <th>Salario</th>
+        </tr>
+    </thead>
+    <tbody id="tablaEmpleados"></tbody>
+</table>
+
+<script>
+const API_URL = "http://localhost/dwes/tema5_api/1_api_empleados/api/empleados";
+
+function cargarEmpleados() {
+    fetch(API_URL)
+        .then(response => response.json())
+        .then(data => mostrarEmpleados(data))
+        .catch(error => console.error(error));
+}
+
+function buscarEmpleado() {
+    const id = document.getElementById("idEmpleado").value;
+    if (!id) return;
+
+    fetch(`${API_URL}/${id}`)
+        .then(response => response.json())
+        .then(data => mostrarEmpleados(data))
+        .catch(error => console.error(error));
+}
+
+// function cargarEmpleados() {
+//     fetch(API_URL)
+//         .then(response => {
+//             if (response.status === 204) {
+//                 mostrarMensaje("No hay empleados");
+//                 mostrarEmpleados([]);
+//                 return null; // 🔑 NO seguimos con json()
+//             }
+
+//             if (!response.ok) {
+//                 throw new Error("Error HTTP: " + response.status);
+//             }
+
+//             return response.json();
+//         })
+//         .then(data => {
+//             if (data !== null) {
+//                 mostrarEmpleados(data);
+//             }
+//         })
+//         .catch(error => {
+//             console.error(error);
+//             mostrarMensaje("Error al conectar con la API");
+//         });
+// }
+
+// function buscarEmpleado() {
+//     const id = document.getElementById("idEmpleado").value;
+//     if (!id) return;
+
+//     fetch(`${API_URL}/${id}`)
+//         .then(response => {
+//             if (response.status === 204 || response.status === 404) {
+//                 mostrarMensaje("Empleado no encontrado");
+//                 mostrarEmpleados();
+//                 return null;
+//             }
+
+//             if (!response.ok) {
+//                 throw new Error("Error HTTP: " + response.status);
+//             }
+
+//             return response.json();
+//         })
+//         .then(data => {
+//             if (data !== null) {
+//                 mostrarEmpleados(data);
+//             }
+//         })
+//         .catch(error => {
+//             console.error(error);
+//             mostrarMensaje("Error al buscar empleado");
+//         });
+// }
+
+
+
+function mostrarEmpleados(empleados) {
+    const tbody = document.getElementById("tablaEmpleados");
+    tbody.innerHTML = "";
+
+    empleados.forEach(emp => {
+        tbody.innerHTML += `
+            <tr>
+                <td>${emp.nombre}</td>
+                <td>${emp.direccion}</td>
+                <td>${emp.salario}</td>
+            </tr>
+        `;
+    });
+}
+
+
+
+
+function mostrarMensaje(texto) {
+    alert(texto); // luego puedes cambiarlo por un <div>
+}
+
+</script>
+
+</body>
+</html>

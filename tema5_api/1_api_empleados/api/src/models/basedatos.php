@@ -112,6 +112,53 @@ class Basedatos
 
     }
 
+    //Metodo para borrar un empleado de la bbdd DELETE
+    public function actualizarEmpleado(int $id_, array $data){
+
+
+        // Solo actualizamos los campos que vengan. 
+        //Voy a construir dinamicamente el UPDATE con implode
+        //En lugar de hacer el binding con :tag, lo haré con ?
+
+        $campos = [];  //hago el binding con la notacion ?
+        $valores = [];  //valores a asignar en el binding
+
+        if (isset($data["nombre"])) {
+            $campos[] = "nombre = ?";
+            $valores[] = $data["nombre"];
+        }
+
+        if (isset($data["direccion"])) {
+            $campos[] = "direccion = ?";
+            $valores[] = $data["direccion"];
+        }
+
+        if (isset($data["salario"])) {
+            $campos[] = "salario = ?";
+            $valores[] = $data["salario"];
+        }
+
+        //Añado tambien el ID para hacer el binding
+        $valores[] = $id_; 
+
+        $sql = "UPDATE empleados SET " . implode(', ', $campos) . " WHERE id = ?";
+
+        try{
+            $sentencia = $this->conexionPDO->prepare($sql);
+            $sentencia -> execute($valores);
+            enviar_log("Usuario con id $id_ actualizado correctamente","info");
+            return true;
+
+        }
+        catch(PDOException $e){
+            enviar_log($e->getMessage(),"error");
+            return false;
+        }
+
+    }
+
+
+
 
 } //fin clase
 

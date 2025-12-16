@@ -108,12 +108,48 @@ function manejarRequest($uri, $requestMethod, $param){
                     exit();
                 }
 
+            }else{
+                $respuesta = ['error' => 'Falta el ID en el endpoint.'];
+                http_response_code(400);
+                echo json_encode($respuesta);
+                exit();
             }
-           
+            break;   
+
+        case 'PATCH':
+            //-------------------------------
+            //Endpoint PATCH /api/empleados/X
+            //-------------------------------
+            if ($userId !== null && $userId != "" ){
+                $data = json_decode(file_get_contents('php://input'), TRUE);    
+
+                if ($data === null) {
+                    http_response_code(400);
+                    echo json_encode(['error' => 'no has proporcionado datos']);
+                    exit;
+                }
+
+                $actualizadoOK = $bd->actualizarEmpleado($userId, $data);
+                if ($actualizadoOK) {
+                    $respuesta = ['mensaje' => "Empleado con id $userId actualizado."];
+                    http_response_code(200);
+                    echo json_encode($respuesta);
+                    exit();
+                } else {
+                    $respuesta = ['error' => 'Error al actualizar empleado.'];
+                    http_response_code(500);
+                    echo json_encode($respuesta);
+                    exit();
+                }
+            }
+            else{
+                $respuesta = ['error' => 'Falta el ID en el endpoint.'];
+                http_response_code(400);
+                echo json_encode($respuesta);
+                exit();
+
+            }    
             break;
-
-        
-
 
         default:
             header("HTTP/1.1 400 Bad Request");
