@@ -18,7 +18,9 @@ Para consultar cualquiera de estos 3 endpoint, necesitas clave. Para poder hacer
 
 
 ## Cifrado de claves
-Las claves deben guardarse en la bbdd cifradas, mediante hash. El lugar de usar `password_hash()` y `password_verify()`, que es no determinista, vamos a usar `hash()` que es determinista y produce el mismo hash cada vez.
+Las claves estarán en la bbdd cifradas, mediante hash.  En el ejercicio no hay que crear nuevas claves, están ya creadas.
+
+El lugar de usar `password_hash()` y `password_verify()`, que es no determinista, vamos a usar `hash()` que es determinista y produce el mismo hash cada vez. Esto nos va a ayudar a buscar la key enviada en la cabecera para saber el rol.
 
 ```php
 //Creamos el hash de la key, con 64 caracteres (256 bits)
