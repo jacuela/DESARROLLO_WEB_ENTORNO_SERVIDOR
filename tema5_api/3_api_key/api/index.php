@@ -41,10 +41,6 @@ $titulo = $partes[6] ?? null;
 $titulo = urldecode($titulo); //la usamosa para que coja bien los espacios
 
 
-var_dump($titulo);
-die;
-
-
 switch ($requestMethod){
     case 'GET':
         if ($titulo == null){
@@ -55,10 +51,12 @@ switch ($requestMethod){
             die;
         }
         else{
-          //endpoint GET /api/libros/titulo  
-
+            //endpoint GET /api/libros/titulo
+            $libros = obtenerLibros($titulo);
+            http_response_code(200);
+            echo json_encode($libros);
+            die;
         }
-
         break;
     case 'POST':
         if ($rol === "ADMIN"){

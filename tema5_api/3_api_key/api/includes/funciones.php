@@ -78,15 +78,31 @@ function obtener_rol($key){
 }
 
 
-function obtenerLibros(){
+//Función sobrecargada
+//Si no le paso el título, devuelve todos los libros
+//Si le paso un título, devuelve solo los libros con ese título
+function obtenerLibros($titulo = null){
     
     $pdo = conectarBBDD();
 
-    $sql = "SELECT * FROM libro";
+    if ($titulo == null){
+        //Quiero todos los libros;
+        $sql = "SELECT * FROM libro";
+    }else{
+
+        $titulo = "%$titulo%";
+        $sql = "SELECT * FROM libro WHERE titulo LIKE :titulo";
+    }
 
     try{
         $stmt = $pdo->prepare($sql);
-        $stmt->execute();
+        if ($titulo !== null){
+            $stmt->execute([":titulo" => $titulo]);
+        }
+        else{
+            $stmt->execute();
+        }
+        
 
         $libros = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $libros;
@@ -94,6 +110,8 @@ function obtenerLibros(){
     }
     catch(PDOException $e){
         //Interesante guardar la excepcion en el log
+        var_dump($e);
+        die;
         http_response_code(500);
         echo json_encode([
             'error' => 'Error de conexión a la base de datos'
