@@ -74,6 +74,10 @@ switch ($requestMethod){
             echo json_encode($respuesta);
             exit();
         }
-        break;    
+        break;   
+
+        //endpoint DELETE /api/libros/10
+        
+        
 }    
 

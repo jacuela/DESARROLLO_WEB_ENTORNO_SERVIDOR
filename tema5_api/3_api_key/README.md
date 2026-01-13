@@ -28,4 +28,18 @@ $keyHash = hash('sha256', $key);
 ```
 
 
+## Obtener libros por título
+Hay que llevar cuidado con dos aspectos al intentar obtener libros por un título:
+- si el título tiene espacios, el espacio se envía como %20. Hay que depurar esto. Por ejemplo, el endpoint "/api/libros/señor de los"
+```php
+$titulo = urldecode($titulo); //para que coja bien los espacios
+```
+
+- a la hora de usar el LIKE en la consulta SQL, si queremos buscar un patrón en el título, hay que llevar cuidado en como usar los %.
+```php
+$titulo = "%$titulo%";
+$sql = "SELECT * FROM libro WHERE titulo LIKE :titulo";
+...
+$stmt->execute([":titulo" => $titulo]);
+```
 
