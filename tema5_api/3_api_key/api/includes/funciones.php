@@ -104,6 +104,40 @@ function obtenerLibros(){
 }
 
 
+function insertarLibro($libro){
+    
+    $pdo = conectarBBDD();
+
+    $titulo = $libro["titulo"];
+    $autor = $libro["autor"];
+    $genero = $libro["genero"];
+    
+    $sql = "INSERT INTO libro (titulo, autor, genero) VALUES
+            (:titulo, :autor, :genero)";
+
+    try{
+        $sentencia = $pdo -> prepare($sql);
+        $sentencia -> bindParam(":titulo",$titulo);
+        $sentencia -> bindParam(":autor",$autor);
+        $sentencia -> bindParam(":genero",$genero);
+
+        $sentencia -> execute();
+        return true;
+
+    }catch(PDOException $e){
+         //Interesante guardar la excepcion en el log
+        http_response_code(500);
+        echo json_encode([
+            'error' => 'Error de conexión a la base de datos'
+        ]);
+        exit;
+    }
+
+
+
+
+
+}
 
 
 

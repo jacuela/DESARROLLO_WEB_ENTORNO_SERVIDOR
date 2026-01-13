@@ -38,6 +38,12 @@ if ($partes[4] !== 'api' || $partes[5] != 'libros'){
 
 //Miramos si hemos pedido usuario
 $titulo = $partes[6] ?? null;
+$titulo = urldecode($titulo); //la usamosa para que coja bien los espacios
+
+
+var_dump($titulo);
+die;
+
 
 switch ($requestMethod){
     case 'GET':
@@ -51,14 +57,25 @@ switch ($requestMethod){
         else{
           //endpoint GET /api/libros/titulo  
 
-
-
         }
-
-
 
         break;
     case 'POST':
+        if ($rol === "ADMIN"){
+            //endpoint POST /api/libros/
+            $data = json_decode(file_get_contents('php://input'), TRUE);  
+            if (insertarLibro($data)){
+                $respuesta = ['mensaje' => "Libro añadido."];
+                http_response_code(201);
+                echo json_encode($respuesta);
+            }
+        }
+        else{
+            $respuesta = ['error' => 'No tienes permiso para añadir libro. Peinate socio!'];
+            http_response_code(400);
+            echo json_encode($respuesta);
+            exit();
+        }
         break;    
 }    
 

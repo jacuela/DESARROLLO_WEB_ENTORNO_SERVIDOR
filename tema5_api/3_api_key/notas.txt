@@ -1,0 +1,41 @@
+SELECT rol
+FROM api_keys
+WHERE api_key = SHA2(:api_key_recibida, 256);
+
+
+
+# HASHEAR LA KEY
+$apiKeyPlano = 'clave-super-secreta-admin';
+$apiKeyHash = hash('sha256', $apiKeyPlano);
+echo $apiKeyHash;
+
+# INSERTAR API KEY
+$sql = "INSERT INTO api_keys (api_key, rol) VALUES (:api_key, :rol)";
+$stmt = $pdo->prepare($sql);
+$stmt->execute([
+    ':api_key' => $apiKeyHash,
+    ':rol'     => 'ADMIN'
+]);
+
+
+
+$headers = getallheaders();
+$apiKeyRecibida = $headers['X-API-KEY'] ?? '';
+
+$apiKeyHash = hash('sha256', $apiKeyRecibida);
+
+$sql = "SELECT rol FROM api_keys WHERE api_key = :api_key";
+$stmt = $pdo->prepare($sql);
+$stmt->execute([
+    ':api_key' => $apiKeyHash
+]);
+
+$rol = $stmt->fetchColumn();
+
+if (!$rol) {
+    http_response_code(401);
+    echo json_encode(['error' => 'API Key no válida']);
+    exit;
+}
+
+
