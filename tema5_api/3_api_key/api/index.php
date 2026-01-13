@@ -41,8 +41,22 @@ $titulo = $partes[6] ?? null;
 
 switch ($requestMethod){
     case 'GET':
-        //endpoint GET /api/libros/titulo
-        
+        if ($titulo == null){
+            //endpoint GET /api/libros
+            $libros = obtenerLibros();
+            http_response_code(200);
+            echo json_encode($libros);
+            die;
+        }
+        else{
+          //endpoint GET /api/libros/titulo  
+
+
+
+        }
+
+
+
         break;
     case 'POST':
         break;    
