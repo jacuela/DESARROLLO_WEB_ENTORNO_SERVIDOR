@@ -57,7 +57,7 @@ Esta es una descripción general de la estructura de un proyecto de Laravel. Cab
 Las herramientas o tooling que necesitamos para laravel son:
 - PHP
 - Composer
-- node js (no es estrictamente necesario, pero para vistas avanzadasl, por ejemplo, para usar *vite* lo necesitamos
+- node js (no es estrictamente necesario, pero para vistas avanzadasl, por ejemplo, para usar *vite* lo necesitamos)
 - XAMPP (Apache + MYSQL)
 
 Existe un entorno llamado **Laravel Herd** que se encarga de instalarlo todo, permite dominios automáticos, gestion de versiones de PHP, etc. Pero, en un entorno de inicio, educativo, no es necesario. Además, tenemos instalado casi todo lo que necesitamos.
@@ -87,10 +87,25 @@ Editar el archivo .profile o .zprofile del directorio home del usuario.
 export PATH="/Applications/XAMPP/bin:$PATH"
 export PATH="$HOME/.composer/vendor/bin:$PATH"
 ```
+
+Para crear un nuveo proyecto, se hace todo con un solo comando. Simple.  
 ```
 #laravel new blog       creamos un nuevo proyecto llamado blog
 #composer run dev       lanzamos el servidor
+````
+
+¿Qué ocurre si tenemos algún parámetro de nuetra base de datos distinto al por defecto? Este comando, al indicarle la base de datos, usa el puerto por defecto, así como el usuario y contraseña por defecto.
+
+Si hubiera que cambiar algún parámetro, haremos lo siguiente. Solo lo haremos una vez. Cuando esté todo configurado bien, solamente ejecutar `#composer run dev`.
 ```
+—> Acceder a .env y poner los parámetros de configuración de la bbdd
+-> Crear la base de datos si no lo  estuviera. El nombre debe coincidir con el puesto en .env, es decir "CREATE DATABASE proyecto"
+#php artisan config:clear          para limpiar cache
+#php artisan optimize:clear         para limpiar cache
+#php artisan migrate
+#composer run dev
+```
+
 
 ## Introducción a las rutas. Definición y nombrado.
 Las rutas web se definen en `routes/web.php`
@@ -109,7 +124,6 @@ Normalmente, a las rutas les asignamso un nombre para poder luego referenciarlas
 Route::get('/', function () {
     return view('home');
 })->name('home');
-```
 
 Route::get('/contacto', function () {
     return view('contacto');
@@ -117,19 +131,15 @@ Route::get('/contacto', function () {
 
 ```
 
-TIP: Marcar opción activa en el menú en una vista. 
-```html
-Si estamos en la ruta 'home', asígnale la clase 'active'
-
-<a href="{{ route('home') }}"
-   class="{{ request()->routeIs('home') ? 'active' : '' }}">
-   Inicio
-</a>
-
-```
+Si una vista esta en una subcarpeta de views, se referencia con el punto. Por ejemplo, si tenemos la estructura `resources/views/miscosas/curriculo.blade.php`, para referencias a estra vista, lo haremos con `view('miscosas.curriculo')`
 
 
 ## Motor de plantillas Blade
+
+IMPORTANTE: vamos a usar herencia de plantillas (más antiguo) en lugar de componentes (más moderno) para el layout con Blade.
+
+<a href="https://www.cloudways.com/blog/create-laravel-blade-layout/">Apuntes Layout en Blade</a>
+
 Blade es el motor de plantillas de Laravel. Permite:
 	•	Reutilizar vistas
 	•	Separar estructura y contenido
@@ -213,5 +223,14 @@ Una vista hija hereda del layout. Ubicada en `resources/views/home.blade.php`
 @extends	Hereda un layout  
 @section	Rellena un @yield  
 
+
+En blade, puedo usar funciones. Por ejemplo, para saber si actualemente enstamos en una ruta, y poder asignarle un estilo, usaremos `request()->routeIs('home')`, usando el nombre de la ruta 'home'. 
+```html
+Si estamos en la ruta 'home', asígnale la clase 'active'
+
+<a href="{{ route('home') }}"
+   class="{{ request()->routeIs('home') ? 'active' : '' }}">
+   Inicio
+</a>
 
 
