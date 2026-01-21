@@ -1,0 +1,78 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+
+/* Reset básico */
+* {
+    box-sizing: border-box;
+}
+
+/* Menú */
+nav {
+    background-color: #000;
+    padding: 1rem;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: red;
+}    
+
+nav a.active {
+    color: red;
+    border-bottom: 2px solid red;
+    padding-bottom: 4px;
+}
+
+
+/* Contenido */
+main.container {
+    padding: 2rem;
+}
+
+/* Footer */
+footer {
+    background-color: #f2f2f2;
+    text-align: center;
+    padding: 1rem;
+    margin-top: 2rem;
+}
+
+h1{
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+
+/*tabla sencilla*/
+table {
+    border-collapse: collapse;
+    width: 70%;
+}
+th, td {
+    border: 1px solid #ccc;
+    padding: 8px;
+}
+th {
+    background-color: #f2f2f2;
+}
