@@ -15,18 +15,28 @@ Route::get('/saludo', function(){
 })->name('saludo');
 
 
+
+
+
+
+
 Route::get('/hola', function () {
-    return view('holamundo');
+
+    $ciudad = "Murcia";
+
+    return view('holamundo',[
+        "nombre" => "Pepito",
+        "apellidos" => "Perez",
+        "localidad" => $ciudad
+    ]);
 });
+
 
 
 
 Route::get('/', function(){
     return view('home');
 })->name('home');
-
-
-
 
 
 Route::get('/about', function(){
@@ -41,11 +51,26 @@ Route::get('/mas/curriculo', function(){
     return view('otro.curriculo');
 })->name('curriculo');
 
-Route::get('/listado', function(){
 
+//Vista para pasar un valor por URL
+//    /libro/X
+// Route::get('/libro/{id?}', function($id = 1){
+//     return view('libros.libro',[
+//         "id" => $id
+//     ]);
+// })->name('libro');
+
+Route::get('/libro', function($id_defecto = 666666){
+    return view('libros.libro',[
+        "id" => request('id',$id_defecto)
+    ]);
+})->name('libro');
+
+
+
+Route::get('/listado', function(){
    
     $nombre_biblioteca = "FloriBIBLIO";
-
     $libros = [
             [
                 'nombre' => 'Gabriel García Márquez',
@@ -63,7 +88,6 @@ Route::get('/listado', function(){
                 'genero' => 'Fantasía'
             ]
     ];
-
 
     return view('libros.listado',["nombre_biblioteca" => $nombre_biblioteca,
                                   "libros" => $libros]);
