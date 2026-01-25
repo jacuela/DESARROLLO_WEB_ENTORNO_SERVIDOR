@@ -76,7 +76,7 @@ De esta forma vamos más paso a paso.
 ### Crear nuevo proyecto con el instalador de laravel
 Hay que instalar el instalador de forma global con
 ```
-#composer global require laravel/installer
+>composer global require laravel/installer
 ```
 Una vez instalado, asegurarnos que el comando `#laravel` esta accesible. Sino, incluir en el path
 la ruta $HOME/.composer/vendor/bin, que es donde está dicho comando.
@@ -90,9 +90,9 @@ export PATH="$HOME/.composer/vendor/bin:$PATH"
 
 Para crear un nuveo proyecto, se hace todo con un solo comando. Simple.  
 ```
-#laravel new blog       creamos un nuevo proyecto llamado blog
-#composer run dev       lanzamos el servidor
-````
+>laravel new blog       creamos un nuevo proyecto llamado blog
+>composer run dev       lanzamos el servidor
+```
 
 ¿Qué ocurre si tenemos algún parámetro de nuetra base de datos distinto al por defecto? Este comando, al indicarle la base de datos, usa el puerto por defecto, así como el usuario y contraseña por defecto.
 
@@ -100,11 +100,22 @@ Si hubiera que cambiar algún parámetro, haremos lo siguiente. Solo lo haremos 
 ```
 —> Acceder a .env y poner los parámetros de configuración de la bbdd
 -> Crear la base de datos si no lo  estuviera. El nombre debe coincidir con el puesto en .env, es decir "CREATE DATABASE proyecto"
-#php artisan config:clear          para limpiar cache
-#php artisan optimize:clear         para limpiar cache
-#php artisan migrate
-#composer run dev
+>php artisan config:clear          para limpiar cache
+>php artisan optimize:clear         para limpiar cache
+>php artisan migrate
+>composer run dev
 ```
+
+
+### Renombrar un proyecto
+Para renombrar un proyecto no hay ningun comando especial. Hay que hacer varias pasos. Lo mas importante es solamente cambiar el nombre de la carpera y limpiar configuraciones. ¿Y la base de datos? Se puede mantener con el mismo nombre pero no es muy ordenado. Así que mejor cambiarla también.
+- Renombrar nombre de la carpeta del proyecto
+- Cambiar el nombre de la app en .env `APP_NAME=nuevo_nombre`
+- Cambiar el nombre de la base datos en .env `DB_DATABASE=nuevo_nombre`
+- Limpiar cache con `php artisan config:clear`
+- Crear las migraciones de la bbdd `php artisan migrate`
+
+- OPCIONAL: cambiar en composer.json el nombre de la app y luego `composer dump-autoload`
 
 
 ## Introducción a las rutas. Definición y nombrado.
@@ -232,5 +243,124 @@ Si estamos en la ruta 'home', asígnale la clase 'active'
    class="{{ request()->routeIs('home') ? 'active' : '' }}">
    Inicio
 </a>
+```
+
+## La arquitectura MVC
+El patrón MVC (Modelo-Vista-Controlador) es una arquitectura de software que separa una aplicación en tres componentes principales para organizar mejor el código y facilitar su mantenimiento. El Modelo se encarga de la gestión de los datos y la lógica de negocio, interactuando con la base de datos y representando las entidades del sistema, como por ejemplo un libro o un usuario. La Vista es la capa encargada de la presentación, mostrando la información al usuario mediante plantillas o interfaces gráficas. Por último, el Controlador actúa como intermediario entre la Vista y el Modelo, recibiendo las solicitudes del usuario, procesando la lógica necesaria y enviando los datos correspondientes a la Vista.
+
+El uso del patrón MVC permite separar responsabilidades, lo que facilita la escalabilidad y el trabajo en equipo, ya que desarrolladores pueden trabajar en la lógica, en la interfaz o en la base de datos de manera independiente. Además, mejora la mantenibilidad del código y la reutilización de componentes, y es ampliamente utilizado en frameworks modernos como Laravel, Ruby on Rails o ASP.NET, donde las rutas llevan al controlador, este interactúa con el modelo y finalmente devuelve la vista al usuario.
+
+![logo](./images/flujo_laravel_MVC.png)
+
+- **Modelo:** gestiona los datos y la lógica de negocio; se comunica con la base de datos.
+- **Vista:** muestra la información al usuario mediante plantillas o interfaces gráficas.
+- **Controlador:** recibe las solicitudes del usuario, procesa la lógica y envía los datos a la vista.
+- **Ventaja:** separa responsabilidades, facilita mantenimiento, reutilización de código y trabajo en equipo.
+- **Uso:** ampliamente usado en frameworks modernos como Laravel, donde las rutas llaman al controlador, este usa el modelo y devuelve la vista.
 
 
+## Crear controladores y sus rutas
+Normalmente, a la hora de manejar datos, no se le pasan directamente a las vistas. Usamos una estructura MVC, modelo., vista, controlador. 
+
+El controlador recibe la petición, decide qué hacer y devuelve una respuesta (texto, vista o datos).
+
+### 1. Creamos el controlador
+Podemos crear un controlador con unos métodos ya predefinidos (-r de controlador de recursos), pero vamos a crearnos nuestro controlador vacio y luego programaremos los métodos que queramos.
+`php artisan make:controller LibroController`
+
+Esto crea el controlador en `app/Http/Controllers/`
+
+### 2. Programamos el controlador
+```php
+ class LibroController extends Controller
+{
+    // Listar libros
+    public function index()
+    {
+        return "Listado de libros";
+    }
+
+    // Mostrar formulario de creación
+    public function create()
+    {
+        return "Formulario para crear libro";
+    }
+
+    // Mostrar un libro concreto
+    public function show($id)
+    {
+        return "Mostrando el libro con ID: " . $id;
+    }
+}
+```
+### 3. Creamos las rutas, esta vez, usando el controlador
+```php
+use App\Http\Controllers\LibroController;
+
+Route::get('/libros', [LibroController::class, 'index']);
+Route::get('/libros/crear', [LibroController::class, 'create']);
+Route::get('/libros/{id}', [LibroController::class, 'show']); //-> where('id', '[0-9]+');
+```
+
+
+## Crear el modelo y diseñar las migraciones
+El siguiente paso es crear el modelo (la clase libro) y la tabla en la bbdd. 
+
+`php artisan make:model Libro -m`
+
+Esto hace dos cosas:
+
+1.	Crea el archivo del modelo en app/Models/Libro.php
+2.	Crea una migración en database/migrations/xxxx_xx_xx_create_libros_table.php
+
+```php
+ public function up(): void
+{
+    Schema::create('libros', function (Blueprint $table) {
+        $table->id();                   // ID autoincremental
+        $table->string('titulo');       // Título del libro
+        $table->string('autor');        // Autor
+        $table->integer('anio');        // Año de publicación
+        $table->string('genero');       // Género
+        $table->text('sinopsis')->nullable(); // Sinopsis, opcional
+        $table->timestamps();           // created_at y updated_at
+    });
+}
+```
+Una vez diseñada la migración, debemos ejecutarla. Esto crea la tabla libros en tu base de datos configurada en .env:
+
+`php artisan migrate`
+
+
+Abre app/Models/Libro.php y añade los campos que se pueden llenar masivamente (fillable):
+
+```php
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Libro extends Model
+{
+    use HasFactory;
+
+    protected $fillable = [
+        'titulo',
+        'autor',
+        'anio',
+        'genero',
+        'sinopsis',
+    ];
+}
+``` 
+
+## Usando los métodos del modelo para obtener datos
+Ya podemos en nuestro controlador, usar la clase libro
+
+```php
+$libros = Libro::all(); //devuelve todos los libros
+$libro = Libro::find($id); // busca el libro por ID
+$libro = Libro::findOrFail($id); //si no existe, lanza 404
+``` 
