@@ -332,6 +332,18 @@ Una vez diseñada la migración, debemos ejecutarla. Esto crea la tabla libros e
 `php artisan migrate`
 
 
+
+
+## Usando los métodos del modelo para obtener datos
+Ya podemos en nuestro controlador, usar la clase libro
+
+```php
+$libros = Libro::all(); //devuelve todos los libros
+$libro = Libro::find($id); // busca el libro por ID
+$libro = Libro::findOrFail($id); //si no existe, lanza 404
+``` 
+
+## Generando datos de forma masiva
 Abre app/Models/Libro.php y añade los campos que se pueden llenar masivamente (fillable):
 
 ```php
@@ -356,11 +368,4 @@ class Libro extends Model
 }
 ``` 
 
-## Usando los métodos del modelo para obtener datos
-Ya podemos en nuestro controlador, usar la clase libro
-
-```php
-$libros = Libro::all(); //devuelve todos los libros
-$libro = Libro::find($id); // busca el libro por ID
-$libro = Libro::findOrFail($id); //si no existe, lanza 404
-``` 
+continuara....
