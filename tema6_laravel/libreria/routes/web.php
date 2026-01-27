@@ -44,6 +44,17 @@ Route::get('/contacto', function(){
 })->name('contacto');
 
 
+
+//========= RUTAS DE LIBROS
+Route::get('/libros', [LibroController::class, 'listar_libros'])->name('listado');
+Route::get('/libros/{id}', [LibroController::class, 'mostrar_libro']); //-> where('id', '[0-9]+');
+
+
+
+
+
+
+
 // Route::get('/mas/curriculo', function(){
 //     return view('otro.curriculo');
 // })->name('curriculo');
@@ -89,9 +100,4 @@ Route::get('/contacto', function(){
 //                                   "libros" => $libros]);
 // })->name('listado');
 
-
-
-//========= RUTAS DE LIBROS
-Route::get('/libros', [LibroController::class, 'listar_libros'])->name('listado');
-Route::get('/libros/{id}', [LibroController::class, 'mostrar_libro']); //-> where('id', '[0-9]+');
 
