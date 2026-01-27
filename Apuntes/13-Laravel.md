@@ -112,6 +112,7 @@ Para renombrar un proyecto no hay ningun comando especial. Hay que hacer varias 
 - Renombrar nombre de la carpeta del proyecto
 - Cambiar el nombre de la app en .env `APP_NAME=nuevo_nombre`
 - Cambiar el nombre de la base datos en .env `DB_DATABASE=nuevo_nombre`
+- Crear la base de datos con PHPMyAdmin
 - Limpiar cache con `php artisan config:clear`
 - Crear las migraciones de la bbdd `php artisan migrate`
 
