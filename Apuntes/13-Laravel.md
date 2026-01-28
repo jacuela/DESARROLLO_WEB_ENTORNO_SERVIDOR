@@ -572,5 +572,40 @@ Archivo: resources/views/libros/create.blade.php
 
 
 
+## Laravel: Seguridad CSRF y uso del _token
+
+### 1️⃣ ¿Qué es CSRF?
+
+CSRF significa Cross-Site Request Forgery (falsificación de petición en sitios cruzados).
+- Es un ataque donde un usuario autenticado puede ser engañado para enviar un formulario sin querer.
+- Por ejemplo, alguien podría hacer que tu navegador envíe un formulario a tu aplicación y cambie datos sin tu consentimiento.
+
+### 2️⃣ Cómo lo previene Laravel
+
+Laravel genera automáticamente un token único para cada sesión de usuario.
+- Este token se incluye en cada formulario con @csrf:
+
+```php
+<form action="/libros/guardar" method="POST">
+    @csrf
+    <input type="text" name="titulo">
+    <button type="submit">Guardar</button>
+</form>
+``` 
+
+- @csrf genera algo como 
+
+`<input type="hidden" name="_token" value="eyJpdiI6Ij...">`
+
+- Laravel verifica que el token enviado coincida con el de la sesión.
+- Si no coincide, Laravel rechaza la petición con error 419 (CSRF token mismatch).
+
+
+### 3️⃣ Resumen
+- _token protege los formularios contra envíos maliciosos desde sitios externos.
+- Siempre que uses POST, PUT, PATCH o DELETE, necesitas @csrf.
+- GET no necesita token, porque no modifica datos.
+- Laravel maneja el token automáticamente, solo asegúrate de no olvidarlo en los formularios.
+
 
        
