@@ -337,6 +337,7 @@ Una vez diseñada la migración, debemos ejecutarla. Esto crea la tabla libros e
 
 
 ## Usando los métodos del modelo para obtener datos
+
 Ya podemos en nuestro controlador, usar la clase libro
 
 ```php
@@ -395,7 +396,7 @@ Si tuviéramos un campo *genero*, no existe un faker “oficial” tipo ->genre(
 
 
 ### 3. Activar la factoria en el modelo 
-Abre app/Models/Libro.php y añade los campos que se pueden llenar masivamente (fillable):
+Abre app/Models/Libro.php y añade los campos que se pueden llenar masivamente (fillable). Tanmbién es necesario para que Laravel pueda crear nuevos libros con el ORM (Eloquent).
 
 ```php
 <?php
@@ -443,3 +444,133 @@ Para borrar solo todo el contenido de la base de datos
 `php artisan migrate:fresh`
 
 
+## 📘 Alta de libros en Laravel (Formulario)
+
+### 1. Crear las rutas
+
+Archivo: routes/web.php
+```php
+use App\Http\Controllers\LibroController;
+
+Route::get('/libros/create', [LibroController::class, 'create'])
+    ->name('libros.create');
+
+Route::post('/libros', [LibroController::class, 'store'])
+    ->name('libros.store');
+``` 
+
+	•	GET /libros/create → muestra el formulario
+	•	POST /libros → procesa el envío del formulario
+
+
+### 🎮 2. Controlador
+
+Archivo: app/Http/Controllers/LibroController.php
+
+```php
+use App\Models\Libro;
+use Illuminate\Http\Request;
+
+class LibroController extends Controller
+{
+    public function create()
+    {
+        return view('libros.create');
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'titulo' => 'required|string|max:255',
+            'autor' => 'required|string|max:255',
+            'genero' => 'required|string',
+            'anio' => 'nullable|integer|min:1500|max:' . date('Y'),
+            'isbn' => 'nullable|string|unique:libros,isbn',
+            'descripcion' => 'nullable|string',
+        ]);
+
+        Libro::create($request->all());
+
+        return redirect()->route('libros.index')
+                         ->with('success', 'Libro creado correctamente');
+    }
+}
+``` 
+
+
+📌 Puntos clave
+- validate() comprueba los datos antes de guardar
+- Libro::create() inserta en la base de datos
+- redirect()->route() vuelve al listado
+- with() envía un mensaje flash
+
+
+### 🎨 4. Vista del formulario (Blade)
+
+Archivo: resources/views/libros/create.blade.php
+
+```php
+@section('content')
+<h1>Alta de nuevo libro</h1>
+
+@if ($errors->any())
+    <ul style="color:red">
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+@endif
+
+
+
+<form action="{{ route('libros.store') }}" method="POST">
+    @csrf
+
+    <label>
+        Título:
+        <input type="text" name="titulo" value="{{ old('titulo') }}">
+    </label><br><br>
+
+    <label>
+        Autor:
+        <input type="text" name="autor" value="{{ old('autor') }}">
+    </label><br><br>
+
+    <label>
+        Género:
+        <select name="genero">
+            <option value="">-- Selecciona --</option>
+            @foreach (['Novela','Fantasía','Terror','Romance','Ensayo'] as $genero)
+                <option value="{{ $genero }}" 
+                    {{ old('genero') == $genero ? 'selected' : '' }}>
+                    {{ $genero }}
+                </option>
+            @endforeach
+        </select>
+    </label><br><br>
+
+    <label>
+        Año:
+        <input type="number" name="anio" value="{{ old('anio') }}">
+    </label><br><br>
+
+    <label>
+        ISBN:
+        <input type="text" name="isbn" value="{{ old('isbn') }}">
+    </label><br><br>
+
+    <label>
+        Descripción:
+        <textarea name="descripcion">{{ old('descripcion') }}</textarea>
+    </label><br><br>
+
+    <button type="submit">Guardar libro</button>
+</form>
+
+@endsection
+```
+
+
+
+
+       
