@@ -15,7 +15,7 @@
     </ul>
     @endif
 
-    <form action="{{ route('libros.store') }}" method="POST">
+    <form action="{{ route('storelibro') }}" method="POST">
     @csrf
 
     <label>

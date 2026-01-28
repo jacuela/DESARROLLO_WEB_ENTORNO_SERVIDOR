@@ -26,6 +26,24 @@ class LibroController extends Controller
         
     }
 
+    public function store(Request $request)
+    {
+        $request->validate([
+            'titulo' => 'required|string|max:255',
+            'autor' => 'required|string|max:255',
+            'genero' => 'required|string',
+            'anio'   => 'required|integer|min:1500|max:' . date('Y'),
+            'descripcion' => 'nullable|string',
+        ]);
+
+        Libro::create($request->all());
+
+        return redirect()->route('listado')
+                         ->with('success', 'Libro creado correctamente');
+    }
+
+
+
 
     
 
