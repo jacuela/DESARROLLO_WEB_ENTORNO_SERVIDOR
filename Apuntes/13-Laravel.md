@@ -328,6 +328,7 @@ Esto hace dos cosas:
     });
 }
 ```
+
 Una vez diseñada la migración, debemos ejecutarla. Esto crea la tabla libros en tu base de datos configurada en .env:
 
 `php artisan migrate`
@@ -344,7 +345,56 @@ $libro = Libro::find($id); // busca el libro por ID
 $libro = Libro::findOrFail($id); //si no existe, lanza 404
 ``` 
 
-## Generando datos de forma masiva
+## Generando datos de forma masiva con factorías
+Una Factory define cómo se crea un modelo con datos falsos (usando Faker).
+Sirve para:
+- Poblar la BBDD rápido
+- Probar vistas
+- Probar controladores y relaciones
+- No meter datos “a mano”
+
+### 1. Crear la factoría
+Para generar la factoría, que se crearán en la ruta *database/factories/LibroFactory.php*
+
+`php artisan make:factory LibroFactory --model=Libro`
+
+
+### 2. Definir los datos falsos (Faker)
+Debemos ir a la factoria creada e indicar como se van a generar los datos falsos, que formato tienen. Faker genera datos realistas (no random cutre).
+
+```php
+namespace Database\Factories;
+
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+class LibroFactory extends Factory
+{
+    public function definition(): array
+    {
+        return [
+            'titulo' => $this->faker->sentence(3),
+            'autor' => $this->faker->name(),
+            'anio' => $this->faker->numberBetween(1950, 2024),
+            'isbn' => $this->faker->unique()->isbn13(),
+            'descripcion' => $this->faker->paragraph(3),
+        ];
+    }
+}
+```
+Si tuviéramos un campo *genero*, no existe un faker “oficial” tipo ->genre(), así que lo normal es usar una lista controlada. De hecho, es lo más realista.
+
+```php
+'genero' => $this->faker->randomElement([
+    'Novela',
+    'Ciencia ficción',
+    'Fantasía',
+    'Romance',
+    'Terror'
+    ])
+``` 
+
+
+### 3. Activar la factoria en el modelo 
 Abre app/Models/Libro.php y añade los campos que se pueden llenar masivamente (fillable):
 
 ```php
@@ -369,4 +419,27 @@ class Libro extends Model
 }
 ``` 
 
-continuara....
+
+
+### 4. Generar los datos falsos
+En *database/seeders/DatabaseSeeder.php*, para generar 10 registros:
+
+```php
+use App\Models\Libro;
+
+public function run(): void
+{
+    Libro::factory()->count(10)->create();
+}
+``` 
+
+Despues, ejecutaremos en el terminal:
+`php artisan db:seed`
+
+Si quisieamos borrar y regenerar todo:
+`php artisan migrate:fresh --seed`
+
+Para borrar solo todo el contenido de la base de datos
+`php artisan migrate:fresh`
+
+
