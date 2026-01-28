@@ -61,3 +61,5 @@
 - `get()` devuelve **una colección** de registros.  
 - `first()` devuelve un **objeto individual** o `null`.  
 - `findOrFail()` lanza un **error 404** automáticamente, muy útil para rutas `show` o `edit`.  
+
+
