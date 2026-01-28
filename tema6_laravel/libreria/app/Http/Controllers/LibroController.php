@@ -19,6 +19,14 @@ class LibroController extends Controller
 
     }
 
+    //Mostrar el formulario de alta
+    public function alta_libro()
+    {
+        return view('libros.alta');
+        
+    }
+
+
     
 
 }

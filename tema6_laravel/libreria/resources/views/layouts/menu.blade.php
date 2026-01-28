@@ -37,6 +37,12 @@
                 Listado
             </a>
         </li>
+         <li>
+            <a href="{{ route('altalibro') }}"
+               class="{{ request()->routeIs('altalibro') ? 'active' : '' }}">
+                Alta
+            </a>
+        </li>
 
     </ul>
 </nav>
