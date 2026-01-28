@@ -33,7 +33,7 @@ class LibroController extends Controller
             'autor' => 'required|string|max:255',
             'genero' => 'required|string',
             'anio'   => 'required|integer|min:1500|max:' . date('Y'),
-            'descripcion' => 'nullable|string',
+            'sinopsis' => 'nullable|string',
         ]);
 
         Libro::create($request->all());
