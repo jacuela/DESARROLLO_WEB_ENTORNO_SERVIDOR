@@ -49,13 +49,7 @@ Route::get('/contacto', function(){
 Route::get('/libros', [LibroController::class, 'listar_libros'])->name('listado');
 Route::get('/libros/alta', [LibroController::class, 'alta_libro'])->name('altalibro');
 Route::post('/libros', [LibroController::class, 'store'])->name('storelibro');
-
 Route::get('/libros/{id}', [LibroController::class, 'mostrar_libro']); //-> where('id', '[0-9]+');
-
-
-
-
-
 
 
 

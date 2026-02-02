@@ -609,3 +609,22 @@ Laravel genera automáticamente un token único para cada sesión de usuario.
 
 
        
+
+## Crear modelo + todo lo necesario de golpe en Laravel
+
+Laravel permite generar **modelo, migración, controlador y factory** con un solo comando usando `artisan` (m de migracion, f de factoria y c de controlador).
+
+`php artisan make:model Post -mfc`
+
+Si además queremos que en el controlador aparezcan los típicos métodos de un controlador REST (index(),create(),store(),show(),edit(),update(),destroy()), añadiremoos -resource
+
+`php artisan make:model Post -mfc --resource`
+
+Se generarán los archivos:
+```
+app/Models/Post.php
+database/migrations/xxxx_create_posts_table.php
+app/Http/Controllers/PostController.php
+database/factories/PostFactory.php
+``` 
+
