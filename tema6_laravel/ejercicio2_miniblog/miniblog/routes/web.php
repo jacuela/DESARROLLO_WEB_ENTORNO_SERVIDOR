@@ -20,5 +20,8 @@ Route::post('/articulo', [ArticuloController::class, 'store'])->name('store');
 //Ruta detalle para ver un artículo
 Route::get('/articulo/{id}', [ArticuloController::class, 'ver'])->name('ver'); //-> where('id', '[0-9]+');
 
+//Ruta para borrar un articulo
+Route::delete('/articulo/{id}', [ArticuloController::class, 'borrar'])->name('borrar'); //-> where('id', '[0-9]+');
+
 
 
